@@ -1,0 +1,132 @@
+{
+  "contract_id": "A",
+  "file": "contracts/contract_A_northwind_maya.pdf",
+  "pages": 3,
+  "brand": "Northwind Athletics",
+  "brand_id": "northwind",
+  "creator": "Maya Okafor",
+  "creator_standard_package_fee_usd": 4000,
+  "scenario": "Fair contract close to the brand's playbook. A good system should flag little or nothing.",
+  "fields": {
+    "fee": {
+      "quote": "Brand shall pay Creator a flat fee of $4,000.00 (the “Fee”) for the Deliverables.",
+      "value": 4000,
+      "unit": "usd",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "100% of the creator's standard package rate ($4,000).",
+      "page": 1
+    },
+    "usage_rights": {
+      "quote": "Creator grants Brand a non-exclusive license to use the Deliverables for twelve (12) months from first publication of each Deliverable, on Brand's owned social media channels and as paid partnership ads, in the United States and Canada.",
+      "value": 12,
+      "unit": "months",
+      "status": "found",
+      "risk": 2,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Term matches the playbook; territory adds Canada (minor).",
+      "page": 1
+    },
+    "exclusivity": {
+      "quote": "From the Effective Date until three (3) months after the final Deliverable is published, Creator shall not publish paid promotion for a direct competitor of Brand in athletic footwear or apparel.",
+      "value": 3,
+      "unit": "months",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Limited to direct competitors in the category.",
+      "page": 1
+    },
+    "payment_terms": {
+      "quote": "Brand shall pay fifty percent (50%) of the Fee within five (5) business days of signature, and the balance within thirty (30) days of Brand's receipt of Creator's invoice following publication of the final Deliverable.",
+      "value": 30,
+      "unit": "net_days",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "50% on signature, balance net-30. Late interest of 1.5% per month is favorable.",
+      "page": 1
+    },
+    "kill_fee": {
+      "quote": "If Brand cancels the Campaign after the Kickoff Date and before the final Deliverable is published, Brand shall pay Creator a cancellation fee equal to twenty-five percent (25%) of the Fee, in addition to any amounts already paid.",
+      "value": 25,
+      "unit": "percent",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "",
+      "page": 1
+    },
+    "revisions": {
+      "quote": "Brand may request up to two (2) rounds of revisions per Deliverable, delivered as consolidated feedback within three (3) business days of delivery.",
+      "value": 2,
+      "unit": "rounds",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Extra rounds billed at $150 per hour.",
+      "page": 1
+    },
+    "termination": {
+      "quote": "Either party may terminate this Agreement on fourteen (14) days' written notice. Creator shall be paid for all work completed through the termination date.",
+      "value": 14,
+      "unit": "days",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Mutual.",
+      "page": 1
+    },
+    "content_approval": {
+      "quote": "Brand shall approve or provide written feedback on each Deliverable within three (3) business days of receipt. A Deliverable is deemed approved if Brand does not respond within five (5) business days.",
+      "value": {
+        "respond_days": 3,
+        "deemed_approval_days": 5
+      },
+      "unit": "business_days",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Approval cannot be unreasonably withheld.",
+      "page": 1
+    }
+  },
+  "extras": {
+    "disclosure": {
+      "quote": "Creator shall disclose the partnership using #ad or Instagram's paid partnership label, in accordance with the FTC Endorsement Guides.",
+      "value": "required",
+      "risk": 1,
+      "note": "Compliant.",
+      "page": 1
+    }
+  },
+  "helper_quotes": {},
+  "distractors": [
+    {
+      "label": "Late-payment interest is not a payment term",
+      "quote": "Overdue amounts accrue interest at one and one-half percent (1.5%) per month.",
+      "page": 1
+    }
+  ],
+  "expected_flagged_fields": [],
+  "creator_persona": "rights_protective",
+  "as_written_terms": {
+    "fee_mult": 1.0,
+    "usage_months": 12,
+    "excl_months": 3,
+    "net_days": 30,
+    "kill_pct": 25,
+    "revisions": 2
+  },
+  "as_written_interpretation": "as written",
+  "notes": "deviates_from_playbook is judged against the brand's own playbook for fee, usage_rights, exclusivity, payment_terms, kill_fee and revisions. For termination and content_approval it is judged against clauses/norm_reference.json."
+}

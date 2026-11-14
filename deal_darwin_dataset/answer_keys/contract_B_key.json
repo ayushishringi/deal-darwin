@@ -1,0 +1,136 @@
+{
+  "contract_id": "B",
+  "file": "contracts/contract_B_vela_priya.pdf",
+  "pages": 2,
+  "brand": "Vela Beauty",
+  "brand_id": "vela",
+  "creator": "Priya Nair",
+  "creator_standard_package_fee_usd": 6000,
+  "scenario": "Predatory contract. Eight planted traps, each stated plainly. A good system should flag all of them.",
+  "fields": {
+    "fee": {
+      "quote": "Brand shall pay Creator a total fee of $4,500.00 (the “Fee”), which is inclusive of all rights granted under this Agreement, whitelisting, paid media amplification, raw footage and any additional content Brand may request.",
+      "value": 4500,
+      "unit": "usd",
+      "status": "found",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "75% of the creator's standard rate ($6,000) and bundles extras that normally cost extra.",
+      "page": 1
+    },
+    "usage_rights": {
+      "quote": "Creator grants Brand a perpetual, irrevocable, worldwide license to use, edit and create derivative works from the Content in all media now known or later developed, including paid media, whitelisting and dark posts through Creator's account, and the use of Creator's name, voice and likeness, including in AI-generated or AI-modified content.",
+      "value": 999,
+      "unit": "months",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Perpetual, irrevocable, worldwide, includes whitelisting and AI likeness.",
+      "page": 1
+    },
+    "exclusivity": {
+      "quote": "For twelve (12) months from the Effective Date, Creator shall not create, publish or promote any content for any brand in the beauty, skincare, haircare, wellness or personal care categories.",
+      "value": 12,
+      "unit": "months",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Twice the playbook length and covers the creator's whole niche.",
+      "page": 1
+    },
+    "payment_terms": {
+      "quote": "Brand shall pay the Fee within ninety (90) days after the conclusion of the Campaign.",
+      "value": 90,
+      "unit": "net_days",
+      "status": "found",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Net-90 and no advance.",
+      "page": 1
+    },
+    "kill_fee": {
+      "quote": "Brand may cancel the Campaign at any time and for any reason without liability to Creator, and no fee shall be due for any Deliverable that Brand has not yet accepted.",
+      "value": 0,
+      "unit": "percent",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "No kill fee.",
+      "page": 1
+    },
+    "revisions": {
+      "quote": "Creator shall make all revisions requested by Brand until Brand is satisfied in its sole discretion, at no additional charge.",
+      "value": 99,
+      "unit": "rounds",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Unlimited.",
+      "page": 1
+    },
+    "termination": {
+      "quote": "Brand may terminate this Agreement immediately on written notice. Creator may not terminate this Agreement. On any termination, Creator forfeits any unpaid portion of the Fee and shall refund any amount previously paid.",
+      "value": 0,
+      "unit": "days",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Brand only, no notice, forfeiture and refund.",
+      "page": 1
+    },
+    "content_approval": {
+      "quote": "All Content is subject to Brand's approval in its sole discretion, which may be given or withdrawn at any time, including after publication, in which case Creator shall remove the Content within twenty-four (24) hours.",
+      "value": {
+        "respond_days": null,
+        "deemed_approval_days": null,
+        "revocable": true
+      },
+      "unit": "business_days",
+      "status": "found",
+      "risk": 5,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "No deadline, no deemed approval, revocable after posting.",
+      "page": 1
+    }
+  },
+  "extras": {
+    "disclosure": {
+      "quote": "Creator shall not include #ad, a paid partnership label or any other sponsorship disclosure unless Brand instructs Creator to do so in writing.",
+      "value": "prohibited",
+      "risk": 5,
+      "note": "Instructs the creator not to disclose; conflicts with FTC guidance.",
+      "page": 1
+    }
+  },
+  "helper_quotes": {},
+  "distractors": [],
+  "expected_flagged_fields": [
+    "fee",
+    "usage_rights",
+    "exclusivity",
+    "payment_terms",
+    "kill_fee",
+    "revisions",
+    "termination",
+    "content_approval"
+  ],
+  "creator_persona": "rights_protective",
+  "as_written_terms": {
+    "fee_mult": 0.75,
+    "usage_months": 999,
+    "excl_months": 12,
+    "net_days": 90,
+    "kill_pct": 0,
+    "revisions": 99
+  },
+  "as_written_interpretation": "as written",
+  "notes": "deviates_from_playbook is judged against the brand's own playbook for fee, usage_rights, exclusivity, payment_terms, kill_fee and revisions. For termination and content_approval it is judged against clauses/norm_reference.json."
+}

@@ -1,0 +1,131 @@
+{
+  "contract": "C",
+  "brand": "kettle",
+  "creator": "jordan_lee",
+  "persona": "cash_first",
+  "method": "evolutionary search, fitness = Drex P(accept) x creator_utility",
+  "params": {
+    "pop": 40,
+    "elite": 10,
+    "children": 30,
+    "generations": 3,
+    "seed": 255
+  },
+  "n_drex_calls": 120,
+  "generations": [
+    {
+      "gen": 0,
+      "best_fitness": 0.4942,
+      "best_p": 0.9738,
+      "best_utility": 0.5075,
+      "best_offer": {
+        "fee_mult": 1.0,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 2
+      },
+      "new_drex_calls": 40,
+      "elite_mean_fitness": 0.3235
+    },
+    {
+      "gen": 1,
+      "best_fitness": 0.5148,
+      "best_p": 0.9518,
+      "best_utility": 0.5408,
+      "best_offer": {
+        "fee_mult": 1.0,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 1
+      },
+      "new_drex_calls": 30,
+      "elite_mean_fitness": 0.4623
+    },
+    {
+      "gen": 2,
+      "best_fitness": 0.5428,
+      "best_p": 0.9452,
+      "best_utility": 0.5742,
+      "best_offer": {
+        "fee_mult": 1.15,
+        "usage_months": 12,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 2
+      },
+      "new_drex_calls": 27,
+      "elite_mean_fitness": 0.5075
+    },
+    {
+      "gen": 3,
+      "best_fitness": 0.5428,
+      "best_p": 0.9452,
+      "best_utility": 0.5742,
+      "best_offer": {
+        "fee_mult": 1.15,
+        "usage_months": 12,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 2
+      },
+      "new_drex_calls": 23,
+      "elite_mean_fitness": 0.5239
+    }
+  ],
+  "top3": [
+    {
+      "fee_mult": 1.15,
+      "usage_months": 12,
+      "excl_months": 3,
+      "net_days": 15,
+      "kill_pct": 10,
+      "revisions": 2,
+      "p": 0.9452365181630331,
+      "utility": 0.5742,
+      "ev": 0.5428,
+      "plain": "Ask for $2,875 (115% of the standard rate), 12 months of usage rights, 3 months of category exclusivity, payment in net-15, a 10% kill fee, and 2 rounds of revisions."
+    },
+    {
+      "fee_mult": 1.0,
+      "usage_months": 6,
+      "excl_months": 0,
+      "net_days": 15,
+      "kill_pct": 10,
+      "revisions": 1,
+      "p": 0.9799310260990568,
+      "utility": 0.5533,
+      "ev": 0.5422,
+      "plain": "Ask for $2,500 (100% of the standard rate), 6 months of usage rights, none of category exclusivity, payment in net-15, a 10% kill fee, and 1 round of revisions."
+    },
+    {
+      "fee_mult": 1.15,
+      "usage_months": 12,
+      "excl_months": 0,
+      "net_days": 15,
+      "kill_pct": 10,
+      "revisions": 1,
+      "p": 0.8645641932571559,
+      "utility": 0.62,
+      "ev": 0.536,
+      "plain": "Ask for $2,875 (115% of the standard rate), 12 months of usage rights, none of category exclusivity, payment in net-15, a 10% kill fee, and 1 round of revisions."
+    }
+  ],
+  "check": {
+    "v1_top_drex_ev": 0.0016,
+    "v2_top_drex_ev": 0.5428,
+    "v1_top_true_ev": 0.0181,
+    "v2_top_true_ev": 0.3819,
+    "v2_in_true_top10": false,
+    "asw_true_ev": 0.0,
+    "best_true_ev": 0.4915,
+    "max_value_recovered": 0.4915,
+    "v2_value_recovered": 0.3819,
+    "v1_value_recovered": 0.0181
+  }
+}

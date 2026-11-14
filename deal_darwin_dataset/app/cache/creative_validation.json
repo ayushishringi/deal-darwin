@@ -1,0 +1,13 @@
+{
+  "split": "dev",
+  "n": 12,
+  "threshold": 0.5,
+  "model": "drex-max-v1.1",
+  "correct": {
+    "R1": 8,
+    "R2": 12,
+    "R3": 12,
+    "R4": 11,
+    "R5": 11
+  }
+}

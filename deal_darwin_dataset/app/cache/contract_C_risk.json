@@ -1,0 +1,140 @@
+{
+  "contract": "C",
+  "aspects": {
+    "fee": {
+      "aspect": "fee",
+      "status": "ambiguous",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 2,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.035552656816219656,
+        "vague": 0.8230628616530556
+      },
+      "quote": "Fee: $2,500.00, less a platform and affiliate administration fee of ten percent (10%) retained by Brand, for a net payment of $2,250.00.",
+      "value": 2500,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.006736962555858032,
+        "2": 0.008638943501269269,
+        "3": 0.04925326605244264,
+        "4": 0.6481423344791095,
+        "5": 0.2872284934113205
+      },
+      "weight": 0.3
+    },
+    "usage_rights": {
+      "aspect": "usage_rights",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.00448313786022951,
+        "vague": 0.04050810816175229
+      },
+      "quote": "Brand may use the Deliverables on any channel, in any territory, for the Term.",
+      "value": null,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.007681847371117972,
+        "2": 0.018974914705033537,
+        "3": 0.32019271701125623,
+        "4": 0.6029916861329301,
+        "5": 0.0501588347796622
+      },
+      "weight": 0.25
+    },
+    "exclusivity": {
+      "aspect": "exclusivity",
+      "status": "ambiguous",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.75,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.006005502550660306,
+        "vague": 0.9913999720405796
+      },
+      "quote": "Creator shall observe reasonable exclusivity in the Category during the Term.",
+      "value": null,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.005145528010289151,
+        "2": 0.007061222735849377,
+        "3": 0.03761844798854592,
+        "4": 0.5179309371926253,
+        "5": 0.4322438640726903
+      },
+      "weight": 0.2
+    },
+    "payment_terms": {
+      "aspect": "payment_terms",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.025032153910211644,
+        "vague": 0.09063906695301435
+      },
+      "quote": "Brand shall pay the Fee within thirty (30) days following Campaign Completion.",
+      "value": null,
+      "risk": 3,
+      "risk_probabilities": {
+        "1": 0.013253487054102701,
+        "2": 0.05262828755550291,
+        "3": 0.577978346736207,
+        "4": 0.32110522742099046,
+        "5": 0.03503465123319695
+      },
+      "weight": 0.15
+    },
+    "kill_fee": {
+      "aspect": "kill_fee",
+      "status": "not_found",
+      "source": "ndi",
+      "ndi_status": "not_found",
+      "ndi_confidence": null,
+      "page": null,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.029846352149664464,
+        "vague": 0.21229045409396968
+      },
+      "quote": null,
+      "value": null,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.028505474120912158,
+        "2": 0.019853758114769,
+        "3": 0.10109461854642234,
+        "4": 0.49201428296313243,
+        "5": 0.3585318662547641
+      },
+      "weight": 0.1
+    }
+  },
+  "overall_risk": 3.85,
+  "extraction": {
+    "source": "ndi",
+    "ocr_applied": true,
+    "cost_usd": 0.017,
+    "job_ids": [
+      "ccb24c60-e079-437c-b339-e3038fc679b6",
+      "2c0341fe-6d54-4319-8ab8-8fccdca831ab"
+    ],
+    "error": null
+  },
+  "parties": {
+    "brand_name": "Kettle and Company Foods, Inc.",
+    "creator_name": "Jordan Lee"
+  }
+}

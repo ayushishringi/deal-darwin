@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Darwin</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F7F5F0'/%3E%3Cpath d='M16 24V17M16 17l-5.2-5.6M16 17l5.2-5.6' fill='none' stroke='%231D2420' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='25.5' r='2.6' fill='%231D2420'/%3E%3Ccircle cx='9.5' cy='9.5' r='2.8' fill='%23F7F5F0' stroke='%231D2420' stroke-width='2.2'/%3E%3Ccircle cx='22.5' cy='9.5' r='3' fill='%232F6B57'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/web/app.css">
+<script>try { if (localStorage.getItem("dd-theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+</head>
+<body>
+<header class="top">
+  <button class="brand" id="home" aria-label="Deal Darwin home"></button>
+  <div class="cname" id="cname" aria-live="polite"></div>
+  <span class="sp"></span>
+  <button class="iconbtn" id="theme" aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode"></button>
+  <button class="btn ghost sm" id="newc" hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>New contract</button>
+</header>
+
+<div class="shell">
+  <nav class="side" id="side" aria-label="Sections">
+    <button data-view="overview"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Overview</b><small>Risks in your contract</small></span><em></em></button>
+    <button data-view="ask"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span><b>Ask Drex</b><small>Ask anything</small></span><em></em></button>
+    <button data-view="negotiate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l5-5 4 4 7-8"/></svg><span><b>Negotiate</b><small>Counter-offers</small></span><em></em></button>
+    <button data-view="creative"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M5 18l5-5 4 4 2-2 3 3"/></svg><span><b>Creative</b><small>Check visuals</small></span><em></em></button>
+    <button data-view="evidence"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V11M12 19V5M19 19v-6"/></svg><span><b>Scorecard</b><small>How well it works</small></span><em></em></button>
+    <button data-view="pack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/></svg><span><b>Export</b><small>One-page summary</small></span><em></em></button>
+  </nav>
+  <main id="view" tabindex="-1"></main>
+</div>
+<p class="fine">Drex answers with probabilities. Examples use synthetic brands; scores are measured against simulated brands.</p>
+
+<script src="/web/core.js"></script>
+<script src="/web/contract.js"></script>
+<script src="/web/ask.js"></script>
+<script src="/web/negotiate.js"></script>
+<script src="/web/creative.js"></script>
+<script src="/web/pack.js"></script>
+<script src="/web/evidence.js"></script>
+<script>boot();</script>
+</body>
+</html>

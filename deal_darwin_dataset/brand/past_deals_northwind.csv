@@ -1,0 +1,9 @@
+deal_id,brand,date,creator,creator_standard_rate_usd,fee_usd,fee_pct_of_standard,usage,exclusivity,payment,kill_fee_pct,revisions
+NOR-PD-01,northwind,2025-02-11,Femi S.,4500,4500,100,6 months,6 months,net-90,0,2 rounds
+NOR-PD-02,northwind,2025-03-27,Hiro A.,3000,3900,130,24 months,12 months,net-45,25,2 rounds
+NOR-PD-03,northwind,2025-05-08,Elena M.,5500,5500,100,12 months,3 months,net-90,25,2 rounds
+NOR-PD-04,northwind,2025-06-19,Hiro P.,6000,6900,115,6 months,6 months,net-90,25,unlimited
+NOR-PD-05,northwind,2025-08-04,Grace R.,3000,3000,100,6 months,6 months,net-45,10,4 rounds
+NOR-PD-06,northwind,2025-09-16,Omar Y.,1800,2070,115,6 months,12 months,net-30,25,4 rounds
+NOR-PD-07,northwind,2025-11-03,Dev W.,1800,1800,100,6 months,6 months,net-30,25,4 rounds
+NOR-PD-08,northwind,2026-01-22,Omar K.,3800,4370,115,6 months,3 months,net-45,25,unlimited

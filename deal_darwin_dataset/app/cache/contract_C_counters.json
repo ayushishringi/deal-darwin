@@ -1,0 +1,508 @@
+{
+  "contract": "C",
+  "brand": "kettle",
+  "creator": "jordan_lee",
+  "persona": "cash_first",
+  "v1": {
+    "shortlist": [
+      {
+        "fee_mult": 1.5,
+        "usage_months": 24,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.905,
+        "_p": 0.001819818336566915,
+        "_ev": 0.0016
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9167,
+        "_p": 0.001082774604600908,
+        "_ev": 0.001
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9208,
+        "_p": 0.0009455632598418398,
+        "_ev": 0.0009
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 1,
+        "_utility": 0.92,
+        "_p": 0.0008836165268037437,
+        "_ev": 0.0008
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.95,
+        "_p": 0.000737538582297806,
+        "_ev": 0.0007
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 12,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9208,
+        "_p": 0.0008072827598112409,
+        "_ev": 0.0007
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9167,
+        "_p": 0.0007375389894508991,
+        "_ev": 0.0007
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.9167,
+        "_p": 0.0007210643767278018,
+        "_ev": 0.0007
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9875,
+        "_p": 0.0006440482555075637,
+        "_ev": 0.0006
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.9375,
+        "_p": 0.00064404761563568,
+        "_ev": 0.0006
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.9042,
+        "_p": 0.0006587636614190511,
+        "_ev": 0.0006
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9542,
+        "_p": 0.0005624016451396921,
+        "_ev": 0.0005
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9375,
+        "_p": 0.0005752528276951894,
+        "_ev": 0.0005
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 12,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9167,
+        "_p": 0.0005375535222647366,
+        "_ev": 0.0005
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9042,
+        "_p": 0.0005375535222647366,
+        "_ev": 0.0005
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 45,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9,
+        "_p": 0.0006018430845354245,
+        "_ev": 0.0005
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.975,
+        "_p": 0.0003830198546242237,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9333,
+        "_p": 0.00042883525885358784,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.925,
+        "_p": 0.00045891379069024367,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 6,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.925,
+        "_p": 0.0004386357882026407,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 2,
+        "_utility": 0.9167,
+        "_p": 0.0003917735624302744,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 12,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9083,
+        "_p": 0.00041925343167633066,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.9,
+        "_p": 0.00048012856180911515,
+        "_ev": 0.0004
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9667,
+        "_p": 0.0002608379425500075,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9542,
+        "_p": 0.00031252971960494565,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.95,
+        "_p": 0.0002987179271576428,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9417,
+        "_p": 0.0003125293995628526,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9417,
+        "_p": 0.00028551656530660874,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 12,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9333,
+        "_p": 0.0003499161264817308,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 0,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9167,
+        "_p": 0.0003420972321493819,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 6,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9083,
+        "_p": 0.00031967319073682144,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 4,
+        "_utility": 0.9,
+        "_p": 0.0003744611656572404,
+        "_ev": 0.0003
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 1.0,
+        "_p": 0.0002034226943400021,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9667,
+        "_p": 0.00023829189225507653,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.95,
+        "_p": 0.00022776037552623362,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 10,
+        "revisions": 1,
+        "_utility": 0.9075,
+        "_p": 0.0002728982448673954,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 25,
+        "revisions": 2,
+        "_utility": 0.9042,
+        "_p": 0.00024931025507601823,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 3,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9042,
+        "_p": 0.00019008661770561464,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 0,
+        "net_days": 30,
+        "kill_pct": 25,
+        "revisions": 1,
+        "_utility": 0.9,
+        "_p": 0.0002608379425500075,
+        "_ev": 0.0002
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 30,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.9,
+        "_p": 0.00027289876859339687,
+        "_ev": 0.0002
+      }
+    ],
+    "top3": [
+      {
+        "fee_mult": 1.5,
+        "usage_months": 24,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1,
+        "_utility": 0.905,
+        "_p": 0.001819818336566915,
+        "_ev": 0.0016
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9167,
+        "_p": 0.001082774604600908,
+        "_ev": 0.001
+      },
+      {
+        "fee_mult": 1.5,
+        "usage_months": 6,
+        "excl_months": 3,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 2,
+        "_utility": 0.9208,
+        "_p": 0.0009455632598418398,
+        "_ev": 0.0009
+      }
+    ],
+    "comparison": {
+      "our_top_offer": {
+        "fee_mult": 1.5,
+        "usage_months": 24,
+        "excl_months": 0,
+        "net_days": 15,
+        "kill_pct": 50,
+        "revisions": 1
+      },
+      "our_top_ev": 0.0016,
+      "our_value_recovered": 0.0016,
+      "in_true_top10": false,
+      "true_best_offer": {
+        "fee_mult": 1,
+        "usage_months": 3,
+        "excl_months": 12,
+        "net_days": 45,
+        "kill_pct": 10,
+        "revisions": 1
+      },
+      "true_best_ev": 0.4915,
+      "true_value_recovered": 0.4915
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "contract_id": "D",
+  "file": "contracts/contract_D_northwind_diego_SCAN.pdf",
+  "pages": 2,
+  "brand": "Northwind Athletics",
+  "brand_id": "northwind",
+  "creator": "Diego Ramirez",
+  "creator_standard_package_fee_usd": 3200,
+  "scenario": "Messy scan of a printed agreement with handwritten changes, one illegible term and one unclear note.",
+  "fields": {
+    "fee": {
+      "quote": "Brand shall pay Creator a flat fee of $3,200.00 (the “Fee”) for the Deliverables.",
+      "value": 3200,
+      "unit": "usd",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "100% of the creator's standard rate.",
+      "page": 1
+    },
+    "usage_rights": {
+      "quote": "Creator grants Brand a non-exclusive license to use the Deliverables for twelve (12) months from first publication, on Brand's owned social media channels and as paid partnership ads, in the United States.",
+      "value": 12,
+      "unit": "months",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Printed and unmarked.",
+      "page": 1
+    },
+    "exclusivity": {
+      "quote": "For three (3) months after the final Deliverable is published, Creator shall not publish paid promotion for a direct competitor of Brand in athletic footwear or apparel.",
+      "value": null,
+      "candidates": [
+        3,
+        6
+      ],
+      "unit": "months",
+      "status": "ambiguous",
+      "risk": 2,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Printed 'three (3) months' is not struck out, but a handwritten margin note reads '6 mo?? ask legal'. Unclear whether the term was changed.",
+      "page": 1
+    },
+    "payment_terms": {
+      "quote": "Brand shall pay fifty percent (50%) of the Fee on signature and the balance within thirty (30) days of Brand's receipt of Creator's invoice.",
+      "value": 60,
+      "unit": "net_days",
+      "status": "found",
+      "risk": 3,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Printed net-30 is struck through; handwritten 'sixty (60)' with the note 'per call w/ M.R. 11/4' and initials DR. Effective term is net-60.",
+      "page": 1
+    },
+    "kill_fee": {
+      "quote": "If Brand cancels the Campaign after the Kickoff Date, Brand shall pay Creator a cancellation fee equal to twenty-five percent (25%) of the Fee.",
+      "value": null,
+      "candidates": [],
+      "unit": "percent",
+      "status": "ambiguous",
+      "risk": null,
+      "deviates_from_playbook": null,
+      "direction": null,
+      "note": "The percentage is obscured by a coffee stain in the scan. The clean source says 25%, but a model reading only the scan should report that it cannot read the figure.",
+      "page": 1
+    },
+    "revisions": {
+      "quote": "Brand may request up to two (2) rounds of revisions per Deliverable at no additional charge.",
+      "value": 3,
+      "unit": "rounds",
+      "status": "found",
+      "risk": 2,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Printed 'two (2)' is struck through; handwritten '3' with initials DR.",
+      "page": 1
+    },
+    "termination": {
+      "quote": "Either party may terminate this Agreement on fourteen (14) days' written notice. Creator shall be paid for all work completed through the termination date.",
+      "value": 14,
+      "unit": "days",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Printed and unmarked.",
+      "page": 1
+    },
+    "content_approval": {
+      "quote": "Brand shall approve or provide written feedback within three (3) business days of receipt. A Deliverable is deemed approved if Brand does not respond within five (5) business days.",
+      "value": {
+        "respond_days": 3,
+        "deemed_approval_days": 5
+      },
+      "unit": "business_days",
+      "status": "found",
+      "risk": 1,
+      "deviates_from_playbook": false,
+      "direction": "neutral",
+      "note": "Printed and unmarked.",
+      "page": 1
+    }
+  },
+  "extras": {
+    "disclosure": {
+      "quote": "Creator shall disclose the partnership using #ad or Instagram's paid partnership label.",
+      "value": "required",
+      "risk": 1,
+      "note": "Compliant.",
+      "page": 1
+    }
+  },
+  "helper_quotes": {},
+  "distractors": [],
+  "expected_flagged_fields": [],
+  "creator_persona": "balanced",
+  "as_written_terms": {
+    "fee_mult": 1.0,
+    "usage_months": 12,
+    "excl_months": 6,
+    "net_days": 60,
+    "kill_pct": 25,
+    "revisions": 3
+  },
+  "as_written_interpretation": "handwritten changes applied; exclusivity mapped to 6 months (worst case); obscured kill fee mapped to the 25% printed in the clean source",
+  "notes": "deviates_from_playbook is judged against the brand's own playbook for fee, usage_rights, exclusivity, payment_terms, kill_fee and revisions. For termination and content_approval it is judged against clauses/norm_reference.json."
+}

@@ -1,0 +1,140 @@
+{
+  "contract": "D",
+  "aspects": {
+    "fee": {
+      "aspect": "fee",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.00642421490631228,
+        "vague": 0.006570131707632991
+      },
+      "quote": "Brand shall pay Creator a flat fee of $3,200.00 (the \"Fee\") for the Deliverables.",
+      "value": 3200,
+      "risk": 3,
+      "risk_probabilities": {
+        "1": 0.018185271322797954,
+        "2": 0.08850534441612436,
+        "3": 0.676980688137538,
+        "4": 0.19971567801548626,
+        "5": 0.016613018108053504
+      },
+      "weight": 0.3
+    },
+    "usage_rights": {
+      "aspect": "usage_rights",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.00642421490631228,
+        "vague": 0.010287334625128592
+      },
+      "quote": "Creator grants Brand a non-exclusive license to use the Deliverables for twelve (12) months from first publication, on Brand's owned social media channels and as paid partnership ads, in the United States. Whitelisting is not included.",
+      "value": null,
+      "risk": 1,
+      "risk_probabilities": {
+        "1": 0.9900615414732017,
+        "2": 0.007167543962941594,
+        "3": 0.00161210070498966,
+        "4": 0.0007144132844069459,
+        "5": 0.0004444005744601606
+      },
+      "weight": 0.25
+    },
+    "exclusivity": {
+      "aspect": "exclusivity",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.028564668020868086,
+        "vague": 0.0200689642074808
+      },
+      "quote": "For three (3) months after the final Deliverable is published, Creator shall not publish paid promotion for a direct competitor of Brand in athletic footwear or apparel.",
+      "value": null,
+      "risk": 1,
+      "risk_probabilities": {
+        "1": 0.9878859425941859,
+        "2": 0.008569545030994306,
+        "3": 0.0022074279630955734,
+        "4": 0.0008936605796850341,
+        "5": 0.0004434238320391278
+      },
+      "weight": 0.2
+    },
+    "payment_terms": {
+      "aspect": "payment_terms",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.009837051651985257,
+        "vague": 0.03118372504869257
+      },
+      "quote": "Brand shall pay fifty percent (50%) of the Fee on signature and the balance within thirty (30) days of Brand's receipt of Creator's invoice.",
+      "value": null,
+      "risk": 1,
+      "risk_probabilities": {
+        "1": 0.99678731725316,
+        "2": 0.002330333664873801,
+        "3": 0.0005737350378430363,
+        "4": 0.00018527592437002805,
+        "5": 0.00012333811975311993
+      },
+      "weight": 0.15
+    },
+    "kill_fee": {
+      "aspect": "kill_fee",
+      "status": "not_found",
+      "source": "ndi",
+      "ndi_status": "not_found",
+      "ndi_confidence": null,
+      "page": null,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.0112499861733526,
+        "vague": 0.935085106980769
+      },
+      "quote": null,
+      "value": null,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.11331502854742237,
+        "2": 0.06891199509406068,
+        "3": 0.19494672991097256,
+        "4": 0.3671265706625538,
+        "5": 0.2556996757849906
+      },
+      "weight": 0.1
+    }
+  },
+  "overall_risk": 1.9,
+  "extraction": {
+    "source": "ndi",
+    "ocr_applied": true,
+    "cost_usd": 0.017,
+    "job_ids": [
+      "9d03b18f-0b7b-4c85-96a3-f4226167e2e2",
+      "b79792cf-5b14-4334-910e-331ae9ebe180"
+    ],
+    "error": null
+  },
+  "parties": {
+    "brand_name": "Northwind Athletics, Inc.",
+    "creator_name": "Diego Ramirez"
+  }
+}

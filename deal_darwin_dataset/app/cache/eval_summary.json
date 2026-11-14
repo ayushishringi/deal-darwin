@@ -1,0 +1,7 @@
+{
+  "note": "Typed in from the console output of app/extract_and_rate.py on 2026-11-14. The caches of these variants were overwritten by later runs, so they cannot be recomputed from files.",
+  "extraction": [
+    {"variant": "pdftotext + Drex status", "status": [15, 20], "risk_within_1": [16, 19]},
+    {"variant": "pdftotext + Drex status + ambiguity questions", "status": [14, 20], "risk_within_1": [16, 19]}
+  ]
+}

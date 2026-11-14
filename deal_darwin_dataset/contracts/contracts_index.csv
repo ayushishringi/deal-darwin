@@ -1,0 +1,5 @@
+contract_id,file,scenario,brand,creator,pages,input_type,expected_flagged
+A,contract_A_northwind_maya.pdf,Fair contract close to the brand's playbook. A good system should flag little or nothing.,Northwind Athletics,Maya Okafor,3,text PDF,none
+B,contract_B_vela_priya.pdf,"Predatory contract. Eight planted traps, each stated plainly. A good system should flag all of them.",Vela Beauty,Priya Nair,2,text PDF,"fee,usage_rights,exclusivity,payment_terms,kill_fee,revisions,termination,content_approval"
+C,contract_C_kettle_jordan.pdf,Looks friendly but the traps sit in definitions and Schedule C. Three terms are ambiguous and one is missing.,Kettle & Co,Jordan Lee,2,text PDF,"usage_rights,exclusivity,payment_terms,kill_fee,revisions"
+D,contract_D_northwind_diego_SCAN.pdf,"Messy scan of a printed agreement with handwritten changes, one illegible term and one unclear note.",Northwind Athletics,Diego Ramirez,2,scanned image PDF (no text layer),none

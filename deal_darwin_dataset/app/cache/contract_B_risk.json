@@ -1,0 +1,140 @@
+{
+  "contract": "B",
+  "aspects": {
+    "fee": {
+      "aspect": "fee",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.00273119699765312,
+        "vague": 0.0035792953423342275
+      },
+      "quote": "Brand shall pay Creator a total fee of $4,500.00 (the \"Fee\"), which is inclusive of all rights granted under this Agreement, whitelisting, paid media amplification, raw footage and any additional content Brand may request.",
+      "value": 4500,
+      "risk": 2,
+      "risk_probabilities": {
+        "1": 0.31551670516226743,
+        "2": 0.4739620460316649,
+        "3": 0.1601351326809741,
+        "4": 0.0344249074269945,
+        "5": 0.01596120869809904
+      },
+      "weight": 0.3
+    },
+    "usage_rights": {
+      "aspect": "usage_rights",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.013450155828193096,
+        "vague": 0.03257897953708789
+      },
+      "quote": "perpetual, irrevocable, worldwide license to use, edit and create derivative works from the Content in all media now known or later developed, including paid media, whitelisting and dark posts through Creator's account, and the use of Creat",
+      "value": null,
+      "risk": 5,
+      "risk_probabilities": {
+        "1": 0.002170826882759058,
+        "2": 0.002660638087437765,
+        "3": 0.007358499705343842,
+        "4": 0.1951542296349442,
+        "5": 0.7926558056895151
+      },
+      "weight": 0.25
+    },
+    "exclusivity": {
+      "aspect": "exclusivity",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.001132797137080335,
+        "vague": 0.002610776950332002
+      },
+      "quote": "For twelve (12) months from the Effective Date, Creator shall not create, publish or promote any content for any brand in the beauty, skincare, haircare, wellness or personal care categories.",
+      "value": null,
+      "risk": 5,
+      "risk_probabilities": {
+        "1": 0.003167994093462814,
+        "2": 0.0037111567868127614,
+        "3": 0.015770731523205957,
+        "4": 0.3490580922906438,
+        "5": 0.6282920253058747
+      },
+      "weight": 0.2
+    },
+    "payment_terms": {
+      "aspect": "payment_terms",
+      "status": "found",
+      "source": "ndi",
+      "ndi_status": "found",
+      "ndi_confidence": 0.8888888888888888,
+      "page": 1,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.013450155828193096,
+        "vague": 0.02192665734559256
+      },
+      "quote": "Brand shall pay the Fee within ninety (90) days after the conclusion of the Campaign.",
+      "value": null,
+      "risk": 4,
+      "risk_probabilities": {
+        "1": 0.0039005395635075967,
+        "2": 0.005859304986639508,
+        "3": 0.050181309480701895,
+        "4": 0.6603547674460345,
+        "5": 0.2797040785231165
+      },
+      "weight": 0.15
+    },
+    "kill_fee": {
+      "aspect": "kill_fee",
+      "status": "not_found",
+      "source": "ndi",
+      "ndi_status": "not_found",
+      "ndi_confidence": null,
+      "page": null,
+      "status_probabilities": null,
+      "ambiguity_probabilities": {
+        "conflict": 0.04230237111769501,
+        "vague": 0.12519227154839443
+      },
+      "quote": null,
+      "value": null,
+      "risk": 5,
+      "risk_probabilities": {
+        "1": 0.0027173442042251017,
+        "2": 0.002372671018140573,
+        "3": 0.004570410778437261,
+        "4": 0.12398280722948381,
+        "5": 0.8663567667697133
+      },
+      "weight": 0.1
+    }
+  },
+  "overall_risk": 3.95,
+  "extraction": {
+    "source": "ndi",
+    "ocr_applied": true,
+    "cost_usd": 0.024,
+    "job_ids": [
+      "fe61905b-00bf-4672-b077-dedd7670c90a",
+      "1b04bdd8-b1e9-4814-88b3-c49604bbf909"
+    ],
+    "error": null
+  },
+  "parties": {
+    "brand_name": "Vela Beauty Collective LLC",
+    "creator_name": "Priya Nair"
+  }
+}

@@ -1,0 +1,9 @@
+deal_id,brand,date,creator,creator_standard_rate_usd,fee_usd,fee_pct_of_standard,usage,exclusivity,payment,kill_fee_pct,revisions
+KET-PD-01,kettle,2025-02-11,Ines W.,5500,6320,115,24 months,12 months,net-15,0,2 rounds
+KET-PD-02,kettle,2025-03-27,Quinn G.,3800,4370,115,24 months,none,net-30,0,2 rounds
+KET-PD-03,kettle,2025-05-08,Pia T.,6000,6000,100,12 months,3 months,net-30,25,2 rounds
+KET-PD-04,kettle,2025-06-19,Ben K.,3800,4370,115,6 months,12 months,net-30,10,1 round
+KET-PD-05,kettle,2025-08-04,Femi H.,4500,5180,115,24 months,none,net-30,10,1 round
+KET-PD-06,kettle,2025-09-16,Kara U.,4000,4600,115,12 months,none,net-15,0,unlimited
+KET-PD-07,kettle,2025-11-03,Dev Y.,4000,4600,115,6 months,12 months,net-30,25,1 round
+KET-PD-08,kettle,2026-01-22,Luca G.,6000,6900,115,6 months,3 months,net-15,0,4 rounds

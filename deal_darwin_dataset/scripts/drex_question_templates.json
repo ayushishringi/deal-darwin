@@ -1,0 +1,53 @@
+{
+  "note": "Typed questions for Drex (choice / noul = yes-no / score = ordered levels). Fill {placeholders}. Drex returns probabilities; it does not write text.",
+  "clause_risk": {
+    "type": "choice",
+    "question": "How risky is this clause for the creator compared with the brand's standard terms?\n\nClause: {clause_text}\nStandard: {norm_reference}",
+    "options": [
+      "1 - standard or favorable",
+      "2 - slightly off",
+      "3 - notable concern",
+      "4 - high risk",
+      "5 - severe, walk-away"
+    ]
+  },
+  "clause_deviates": {
+    "type": "noul",
+    "question": "Does this clause deviate from the standard terms?\n\nClause: {clause_text}\nStandard: {norm_reference}"
+  },
+  "brand_accept": {
+    "type": "noul",
+    "question": "Using the brand playbook below, would the brand accept this counter-offer?\n\nPlaybook: {playbook_text}\nOffer: {offer_text}"
+  },
+  "brand_accept_scale": {
+    "type": "score",
+    "question": "How likely is the brand to accept this offer, very unlikely to very likely?\n\nPlaybook: {playbook_text}\nOffer: {offer_text}",
+    "levels": [
+      "very_unlikely",
+      "unlikely",
+      "likely",
+      "very_likely"
+    ]
+  },
+  "creative_rule": {
+    "type": "noul",
+    "vision": true,
+    "question": "Rule {rule_text}. Does the attached image satisfy this rule?",
+    "rules": {
+      "R1": "The Northwind logo is present, fully inside the frame, at least 22% of image width, with clear space equal to its height.",
+      "R2": "Only Navy #0B2545, Orange #FF6B1A, Off-white #F6F3EE and Slate #5C6B7A are used for graphics and headline.",
+      "R3": "The text #ad is present, at least 2.5% of image height, with contrast at least 4.5:1.",
+      "R4": "No competitor name, logo or product is visible.",
+      "R5": "Headline and body copy stay above the bottom 15% of the frame."
+    }
+  },
+  "field_status": {
+    "type": "choice",
+    "question": "For the term '{field}', does the contract state a single clear value?",
+    "options": [
+      "found",
+      "ambiguous",
+      "not_found"
+    ]
+  }
+}

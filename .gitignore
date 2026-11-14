@@ -1,0 +1,15 @@
+.env
+.env
+.env
+.env
+.env
+.env.*
+*.key
+__pycache__/
+.venv/
+node_modules/
+.DS_Store
+*.mov
+*.mp4
+*.zip
+!.env.example

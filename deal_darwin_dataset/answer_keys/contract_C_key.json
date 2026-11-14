@@ -1,0 +1,179 @@
+{
+  "contract_id": "C",
+  "file": "contracts/contract_C_kettle_jordan.pdf",
+  "pages": 2,
+  "brand": "Kettle & Co",
+  "brand_id": "kettle",
+  "creator": "Jordan Lee",
+  "creator_standard_package_fee_usd": 2500,
+  "scenario": "Looks friendly but the traps sit in definitions and Schedule C. Three terms are ambiguous and one is missing.",
+  "fields": {
+    "fee": {
+      "quote": "Brand shall pay Creator the Fee set out in Schedule C.",
+      "value": 2250,
+      "unit": "usd",
+      "status": "found",
+      "risk": 3,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Amount and a 10% deduction are in Schedule C (headline $2,500, net $2,250).",
+      "page": 1
+    },
+    "usage_rights": {
+      "quote": "Brand may use the Deliverables on any channel, in any territory, for the Term.",
+      "value": 36,
+      "unit": "months",
+      "status": "found",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Term is defined as 36 months in Section 1; playbook norm is 6 months.",
+      "page": 1
+    },
+    "exclusivity": {
+      "quote": "Creator shall observe reasonable exclusivity in the Category during the Term.",
+      "value": null,
+      "candidates": [
+        3,
+        12,
+        36
+      ],
+      "unit": "months",
+      "status": "ambiguous",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "'Reasonable' is undefined; Category is very broad (Schedule C); Term is 36 months.",
+      "page": 1
+    },
+    "payment_terms": {
+      "quote": "Brand shall pay the Fee within thirty (30) days following Campaign Completion.",
+      "value": null,
+      "candidates": [
+        30,
+        60,
+        90
+      ],
+      "unit": "net_days",
+      "status": "ambiguous",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "The 30 days start at Campaign Completion, which depends on Brand approval and a sell-through report.",
+      "page": 1
+    },
+    "kill_fee": {
+      "quote": null,
+      "status": "not_found",
+      "page": null,
+      "value": null,
+      "unit": "percent",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "No cancellation fee clause anywhere in the agreement."
+    },
+    "revisions": {
+      "quote": "Creator shall make reasonable revisions requested by Brand.",
+      "value": null,
+      "candidates": [
+        2,
+        4,
+        99
+      ],
+      "unit": "rounds",
+      "status": "ambiguous",
+      "risk": 4,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "No round limit.",
+      "page": 1
+    },
+    "termination": {
+      "quote": "Either party may terminate this Agreement on fourteen (14) days' written notice, and Creator shall be paid for Deliverables accepted by Brand before the termination date, less any unearned advance previously paid.",
+      "value": 14,
+      "unit": "days",
+      "status": "found",
+      "risk": 3,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "Pay only for accepted Deliverables, not work completed.",
+      "page": 1
+    },
+    "content_approval": {
+      "quote": "Brand shall review each Deliverable within five (5) business days of receipt.",
+      "value": {
+        "respond_days": 5,
+        "deemed_approval_days": null
+      },
+      "unit": "business_days",
+      "status": "found",
+      "risk": 3,
+      "deviates_from_playbook": true,
+      "direction": "unfavorable",
+      "note": "No deemed approval if Brand is silent.",
+      "page": 1
+    }
+  },
+  "extras": {},
+  "helper_quotes": {
+    "_term_def": {
+      "quote": "“Term” means the period commencing on the Effective Date and continuing for thirty-six (36) months.",
+      "status": "found",
+      "risk": null,
+      "note": "Definition used by the license clause.",
+      "page": 1
+    },
+    "_cc_def": {
+      "quote": "“Campaign Completion” means the date on which Brand has given final written approval of the last Deliverable and has received Creator's sell-through report.",
+      "status": "found",
+      "risk": null,
+      "note": "Starts the payment clock; both conditions are in Brand's control.",
+      "page": 1
+    },
+    "_fee_sched": {
+      "quote": "Fee: $2,500.00, less a platform and affiliate administration fee of ten percent (10%) retained by Brand, for a net payment of $2,250.00.",
+      "status": "found",
+      "risk": null,
+      "note": "Where the fee deduction appears.",
+      "page": 2
+    },
+    "_cat_sched": {
+      "quote": "“Category” means any packaged food or beverage product, including snacks, beverages, confectionery and supplements.",
+      "status": "found",
+      "risk": null,
+      "note": "Where the exclusivity scope is defined.",
+      "page": 2
+    }
+  },
+  "distractors": [
+    {
+      "label": "12 months is a warranty period, not usage or exclusivity",
+      "quote": "Creator warrants that the Deliverables are original for a period of twelve (12) months",
+      "page": 1
+    },
+    {
+      "label": "$5,000 is Brand's liability cap, not a fee",
+      "quote": "Brand's total liability under this Agreement shall not exceed $5,000.",
+      "page": 1
+    }
+  ],
+  "expected_flagged_fields": [
+    "usage_rights",
+    "exclusivity",
+    "payment_terms",
+    "kill_fee",
+    "revisions"
+  ],
+  "creator_persona": "cash_first",
+  "as_written_terms": {
+    "fee_mult": 0.9,
+    "usage_months": 36,
+    "excl_months": 36,
+    "net_days": 90,
+    "kill_pct": 0,
+    "revisions": 99
+  },
+  "as_written_interpretation": "ambiguous terms mapped to the worst case for the creator; missing kill fee mapped to 0%",
+  "notes": "deviates_from_playbook is judged against the brand's own playbook for fee, usage_rights, exclusivity, payment_terms, kill_fee and revisions. For termination and content_approval it is judged against clauses/norm_reference.json."
+}

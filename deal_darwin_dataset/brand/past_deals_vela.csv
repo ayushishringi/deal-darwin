@@ -1,0 +1,9 @@
+deal_id,brand,date,creator,creator_standard_rate_usd,fee_usd,fee_pct_of_standard,usage,exclusivity,payment,kill_fee_pct,revisions
+VEL-PD-01,vela,2025-02-11,Grace F.,4500,4500,100,12 months,3 months,net-60,25,unlimited
+VEL-PD-02,vela,2025-03-27,Luca X.,2500,2880,115,12 months,6 months,net-45,25,unlimited
+VEL-PD-03,vela,2025-05-08,Hiro L.,3200,3200,100,6 months,3 months,net-90,0,unlimited
+VEL-PD-04,vela,2025-06-19,Kara C.,3200,4800,150,12 months,12 months,net-45,0,2 rounds
+VEL-PD-05,vela,2025-08-04,Ines P.,4000,3600,90,12 months,3 months,net-30,25,4 rounds
+VEL-PD-06,vela,2025-09-16,Tara L.,4000,6000,150,6 months,12 months,net-90,10,2 rounds
+VEL-PD-07,vela,2025-11-03,Ines X.,3800,3800,100,6 months,6 months,net-60,10,4 rounds
+VEL-PD-08,vela,2026-01-22,Camila E.,6000,5400,90,6 months,6 months,net-90,25,2 rounds

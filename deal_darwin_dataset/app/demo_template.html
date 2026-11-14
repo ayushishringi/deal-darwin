@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Darwin</title>
+<style>
+:root {
+  --bg: #0E1318; --surface: #151C23; --surface-2: #1B242C; --raised: #222D37;
+  --border: #26313B; --border-2: #33404C; --line: var(--border); --line-2: var(--border-2);
+  --text: #E6EBEF; --muted: #8A98A5; --faint: #5F6D79; --neutral-line: #B9C3CC;
+  --accent: #6FA8DC; --accent-soft: rgba(111,168,220,.12); --accent-ink: #0E1318;
+  --ok: #5FB48C; --warn: #D9B26A; --bad: #D27C7C;
+  --ok-rgb: 95,180,140; --warn-rgb: 217,178,106; --bad-rgb: 210,124,124;
+  --radius: 16px; --s1: 8px; --s2: 16px; --s3: 24px; --t: 300ms cubic-bezier(.2,.7,.2,1);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font: 15px/1.45 var(--font);
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; height: 100dvh; overflow: hidden; }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top { display: flex; align-items: center; gap: var(--s2); padding: var(--s1) var(--s2); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: var(--s1); font-weight: 800; font-size: 17px; letter-spacing: -.01em; margin-right: var(--s1); }
+.brand svg { width: 28px; height: 28px; }
+.chips { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+.chips button { border: 0; background: none; cursor: pointer; border-radius: 8px; padding: 4px 12px; font-weight: 700; color: var(--muted); transition: background var(--t), color var(--t); }
+.chips button:hover { color: var(--text); }
+.chips button[aria-checked="true"] { background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 0 0 1px rgba(111,168,220,.45); }
+.stepper { display: flex; gap: 4px; margin: 0 0 0 auto; padding: 0; list-style: none; flex-wrap: wrap; }
+.stepper button { display: flex; align-items: center; gap: var(--s1); border: 1px solid transparent; background: none; cursor: pointer;
+  padding: 4px 12px 4px 4px; border-radius: 999px; color: var(--muted); transition: all var(--t); }
+.stepper b { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--surface-2); font-size: 12px; transition: all var(--t); }
+.stepper button:hover { color: var(--text); }
+.stepper button.active { color: var(--text); border-color: var(--line-2); background: var(--surface); }
+.stepper button.active b { background: var(--accent); color: var(--accent-ink); }
+
+/* ---------- grid + cards ---------- */
+main { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s2); padding: var(--s2); min-height: 0; }
+main.no-evo #card-creative { grid-column: 1 / -1; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s2);
+  display: flex; flex-direction: column; gap: var(--s1); min-height: 0; overflow: auto; transition: border-color var(--t), box-shadow var(--t); }
+.card:hover { border-color: var(--line-2); }
+.card-h { display: flex; align-items: center; gap: var(--s1); flex-wrap: wrap; }
+.card-h h2 { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.card-h .sp { flex: 1; }
+.tag { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.tag.warn { color: var(--warn); border-color: rgba(var(--warn-rgb),.3); }
+.tag.ok { color: var(--ok); border-color: rgba(var(--ok-rgb),.3); background: rgba(var(--ok-rgb),.08); font-weight: 600; }
+.tag.win { color: var(--accent); border-color: rgba(111,168,220,.5); }
+.tag.bad { color: var(--bad); border-color: rgba(var(--bad-rgb),.3); background: rgba(var(--bad-rgb),.06); }
+.pulse { animation: pulse 900ms ease-out; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(111,168,220,.35); border-color: var(--accent); } 100% { box-shadow: 0 0 0 10px rgba(111,168,220,0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade { animation: fadeUp 420ms cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 60ms); }
+
+/* ---------- contract ---------- */
+.contract-body { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: var(--s2); align-items: start; }
+.rows { display: flex; flex-direction: column; gap: 4px; }
+.row { border-radius: 12px; border: 1px solid transparent; transition: border-color var(--t), background var(--t); }
+.row:hover, .row.open { border-color: var(--line-2); }
+.row > button { width: 100%; display: grid; grid-template-columns: 1fr auto 96px 36px; align-items: center; gap: var(--s1);
+  background: none; border: 0; cursor: pointer; padding: var(--s1) 12px; text-align: left; border-radius: 12px; }
+.row .name { font-weight: 600; }
+.row .val { color: var(--muted); font-size: 14px; text-align: right; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.dot.found { background: var(--ok); } .dot.ambiguous { background: var(--warn); }
+.dot.not_found { background: var(--bad); }
+.pill { display: grid; place-items: center; height: 24px; border-radius: 999px; font-weight: 800; font-size: 13px; }
+.detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t); }
+.row.open .detail { grid-template-rows: 1fr; }
+.detail > div { overflow: hidden; }
+.detail-in { padding: 0 12px 12px; display: grid; gap: var(--s1); }
+blockquote { margin: 0; padding: var(--s1) 12px; border-left: 2px solid var(--border-2); background: rgba(0,0,0,.18); border-radius: 0 8px 8px 0;
+  font-size: 13px; color: #C9D3E0; font-family: var(--mono); white-space: pre-wrap; }
+blockquote.none { border-left-color: var(--bad); color: var(--bad); font-family: var(--font); }
+.probs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s1) var(--s2); }
+.probs h4 { margin: 0 0 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.pb { display: grid; grid-template-columns: 64px 1fr 34px; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.pb .num { text-align: right; }
+.track { display: block; height: 6px; background: rgba(255,255,255,.05); border-radius: 999px; overflow: hidden; }
+.track > i { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--muted); opacity: .85; transition: width 700ms cubic-bezier(.2,.7,.2,1); }
+.gauge { display: grid; justify-items: center; gap: var(--s1); padding-top: 4px; border-radius: 12px; }
+.ring { position: relative; width: 132px; height: 132px; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 10; }
+.ring .bg { stroke: rgba(255,255,255,.06); }
+.ring .fg { stroke-linecap: round; transition: stroke-dashoffset 1100ms cubic-bezier(.2,.7,.2,1), stroke var(--t); }
+.ring .c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.ring .c b { font-size: 32px; line-height: 1; }
+.ring .c span { font-size: 12px; color: var(--muted); }
+.counts { display: flex; gap: var(--s2); flex-wrap: wrap; justify-content: center; font-size: 13px; color: var(--muted); }
+.counts span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---------- counter-offers ---------- */
+.offers { display: flex; flex-direction: column; gap: var(--s1); }
+.offer { display: grid; grid-template-columns: 32px 1fr; gap: 4px 12px; align-items: center; text-align: left; cursor: pointer;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px; transition: border-color var(--t), background var(--t), transform var(--t); }
+.offer:hover { border-color: var(--line-2); transform: translateY(-1px); }
+.offer[aria-checked="true"] { border-color: rgba(111,168,220,.6); background: linear-gradient(0deg, rgba(111,168,220,.06), rgba(111,168,220,.06)), var(--surface-2); }
+.rank { grid-row: span 2; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: var(--raised); font-weight: 800; }
+.offer[aria-checked="true"] .rank { background: var(--accent-soft); color: var(--accent); }
+.phrase { font-weight: 600; font-size: 14px; }
+.ometa { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; font-size: 12px; color: var(--muted); }
+.ometa .acc { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center; }
+.ometa .track { height: 8px; } .ometa .track > i { background: var(--neutral-line); opacity: .7; }
+.ometa b { color: var(--text); font-weight: 700; }
+
+/* ---------- evolution ---------- */
+.evo-now { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: var(--s1) 12px; background: var(--surface-2); border-radius: 12px; border: 1px solid var(--line); }
+.evo-now .g { font-weight: 800; color: var(--text); font-size: 13px; }
+.evo-now .phrase { flex: 1; min-width: 200px; }
+.evo-now .st { font-size: 12px; color: var(--muted); }
+.evo-now .st b { color: var(--text); }
+.chart { position: relative; flex: 1; min-height: 120px; }
+.chart svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: ew-resize; touch-action: none; user-select: none; }
+.axis text { fill: var(--faint); font-size: 11px; font-family: var(--font); }
+.axis line { stroke: rgba(255,255,255,.06); }
+.line-best { fill: none; stroke: var(--neutral-line); stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.line-mean { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+.area { fill: url(#grad); }
+.scrub { stroke: var(--text); stroke-width: 1; opacity: .45; vector-effect: non-scaling-stroke; }
+.pt { fill: var(--surface); stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.pt.on { fill: var(--accent); }
+.legend { display: flex; gap: var(--s2); font-size: 12px; color: var(--muted); align-items: center; }
+.legend i { display: inline-block; width: 16px; height: 0; border-top: 2.5px solid var(--neutral-line); vertical-align: middle; margin-right: 6px; }
+.legend i.m { border-top: 1.5px dashed var(--muted); }
+input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
+
+/* ---------- creative ---------- */
+.concepts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; flex: 1; min-height: 0; }
+.concept { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+.concept > button { padding: 0; border: 1px solid var(--line); background: var(--bg); border-radius: 12px; overflow: hidden; cursor: zoom-in;
+  position: relative; transition: transform var(--t), border-color var(--t), box-shadow var(--t); min-height: 0; flex: 1; display: block; }
+.concept > button:hover { transform: translateY(-2px); border-color: var(--line-2); }
+.concept img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.concept.win > button { border-color: var(--accent); }
+.concept.lose img { filter: saturate(.55) brightness(.8); }
+.crown { position: absolute; bottom: 8px; left: 8px; background: rgba(14,19,24,.82); color: var(--accent); border: 1px solid rgba(111,168,220,.5); font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 8px; }
+.fit { display: flex; justify-content: space-between; align-items: baseline; }
+.fit b { font-size: 17px; } .fit span { font-size: 12px; color: var(--muted); }
+.rchips { display: flex; gap: 3px; }
+.rc { flex: 1; text-align: center; font-size: 10px; font-weight: 800; border-radius: 5px; padding: 2px 0; cursor: help; }
+.rc.ok { background: rgba(var(--ok-rgb),.12); color: var(--ok); }
+.rc.no { background: rgba(var(--bad-rgb),.14); color: var(--bad); }
+.fail { font-size: 12px; color: var(--bad); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- pack bar ---------- */
+.pack { border-top: 1px solid var(--line); background: var(--surface); padding: var(--s1) var(--s2); display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; transition: box-shadow var(--t); }
+.pack .lbl { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pack img { width: 36px; height: 45px; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--border-2); }
+.pack .po { flex: 1; min-width: 220px; display: flex; flex-direction: column; }
+.pack .po small { color: var(--muted); font-size: 12px; }
+.pack .rs { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+.btn { border: 0; cursor: pointer; background: var(--accent); color: var(--accent-ink); font-weight: 700; border-radius: 10px; padding: var(--s1) var(--s2);
+  display: inline-flex; align-items: center; gap: var(--s1); transition: filter var(--t), transform var(--t); }
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4); }
+.fine { width: 100%; text-align: center; font-size: 11px; color: var(--faint); margin: -4px 0 0; }
+
+/* ---------- lightbox ---------- */
+dialog { border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); color: var(--text); padding: var(--s3) var(--s2) var(--s2); max-width: min(92vw, 860px); }
+dialog::backdrop { background: rgba(2,6,14,.78); backdrop-filter: blur(4px); }
+dialog[open] { animation: fadeUp 260ms cubic-bezier(.2,.7,.2,1); }
+.lb { display: grid; grid-template-columns: minmax(0, 420px) 240px; gap: var(--s2); }
+.lb img { width: 100%; border-radius: 12px; display: block; }
+.lb h3 { margin: 0 0 var(--s1); font-size: 18px; display: flex; align-items: center; gap: var(--s1); }
+.lb .rl { display: grid; grid-template-columns: 28px 1fr 40px; gap: 6px; align-items: center; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.lb .rl .num { text-align: right; }
+.x { position: absolute; top: 8px; right: 8px; border: 0; background: var(--raised); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
+
+/* ---------- printable pack ---------- */
+#sheet-wrap { position: fixed; inset: 0; background: rgba(2,6,14,.88); overflow: auto; z-index: 50; padding: var(--s3) var(--s2); }
+.sheet-bar { max-width: 794px; margin: 0 auto var(--s2); display: flex; justify-content: flex-end; gap: var(--s1); }
+.sheet { max-width: 794px; margin: 0 auto; background: #fff; color: #111A28; border-radius: 8px; padding: 40px 44px; font-size: 13px; }
+.sheet h1 { margin: 0; font-size: 22px; color: #0B2545; display: flex; align-items: center; gap: 8px; }
+.sheet h2 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #5C6B7A; margin: 18px 0 6px; border-bottom: 1px solid #E3E0DA; padding-bottom: 4px; }
+.sheet .sub { color: #5C6B7A; margin: 2px 0 0; }
+.sheet table { width: 100%; border-collapse: collapse; }
+.sheet td, .sheet th { text-align: left; padding: 4px 6px; border-bottom: 1px solid #EEE; vertical-align: top; }
+.sheet th { color: #5C6B7A; font-weight: 600; width: 32%; }
+.sheet .cols { display: grid; grid-template-columns: 1fr 190px; gap: 24px; }
+.sheet img { width: 100%; border-radius: 6px; }
+.sheet q { display: block; font-family: var(--mono); font-size: 11.5px; color: #354152; background: #F6F3EE; border-left: 3px solid #8A98A5; padding: 4px 8px; margin: 2px 0 6px; quotes: none; }
+.sheet .foot { margin-top: 18px; font-size: 10px; color: #8A9BB0; }
+
+/* ---------- responsive / motion / print ---------- */
+/* ---------- live mode ---------- */
+.launcher { position: fixed; inset: 0; z-index: 40; background: rgba(8,11,14,.72); backdrop-filter: blur(6px); display: grid; place-items: center; padding: var(--s2); }
+.lcard { position: relative; width: min(640px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--s3); display: grid; gap: var(--s2); animation: fadeUp 260ms cubic-bezier(.2,.7,.2,1); }
+.drop { display: grid; place-items: center; gap: 4px; padding: 56px var(--s2); border: 1.5px dashed var(--border-2); border-radius: var(--radius); cursor: pointer; color: var(--muted); text-align: center; transition: border-color var(--t), background var(--t), color var(--t); }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); color: var(--text); }
+.drop.has { border-style: solid; border-color: rgba(111,168,220,.6); color: var(--text); }
+.drop b { font-size: 16px; color: var(--text); } .drop small { font-size: 12px; }
+.lrow { display: flex; gap: var(--s1); align-items: center; flex-wrap: wrap; }
+.lrow .btn { margin-left: auto; }
+.lerr { margin: 0; min-height: 1em; font-size: 13px; color: var(--bad); }
+select { font: inherit; font-size: 13px; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; }
+.btn.sm { padding: 4px 12px; font-size: 13px; }
+.btn:disabled { opacity: .5; cursor: progress; }
+.bd { font-style: normal; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; border-radius: 999px; padding: 1px 6px; }
+.bd:empty { display: none; }
+.bd.live { color: var(--ok); background: rgba(var(--ok-rgb),.12); }
+.bd.cached, .bd.fallback { color: var(--warn); background: rgba(var(--warn-rgb),.12); }
+.bd.error { color: var(--bad); background: rgba(var(--bad-rgb),.12); }
+.bd.running { display: inline-block; width: 8px; height: 8px; padding: 0; background: var(--accent); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.pill.pend, .rc.pend { background: rgba(255,255,255,.04); color: var(--faint); box-shadow: none; }
+.pg { font-size: 11px; color: var(--faint); margin-left: 6px; }
+.phrase.pend { color: var(--faint); }
+.concept.pending img { filter: grayscale(1) brightness(.5); }
+.scan { position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(111,168,220,.28), transparent) no-repeat; background-size: 100% 35%; animation: scan 1.1s linear infinite; }
+@keyframes scan { from { background-position: 0 -40%; } to { background-position: 0 140%; } }
+
+@media (max-width: 1000px) {
+  body { height: auto; overflow: auto; display: block; }
+  main { grid-template-columns: 1fr; grid-template-rows: none; }
+  main.no-evo #card-creative { grid-column: auto; }
+  .card { overflow: visible; }
+  .pack { position: sticky; bottom: 0; z-index: 5; }
+  .stepper { margin-left: 0; width: 100%; }
+  .chart { height: 180px; flex: none; }
+  .concept > button { flex: none; aspect-ratio: 4 / 5; }
+}
+@media (max-width: 600px) {
+  .contract-body { grid-template-columns: 1fr; }
+  .concepts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row > button { grid-template-columns: 1fr auto 32px; } .row .val { display: none; }
+  .lb { grid-template-columns: 1fr; }
+  .stepper button span { display: none; } .stepper button { padding: 4px; }
+  .pack .fine { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { display: block; height: auto; overflow: visible; background: #fff; }
+  body > *:not(#sheet-wrap) { display: none !important; }
+  #sheet-wrap { position: static; background: none; padding: 0; overflow: visible; }
+  .sheet-bar { display: none; }
+  .sheet { padding: 0; max-width: none; border-radius: 0; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#1B242C"/><path d="M9 23 L16 8 L23 23 Z" fill="none" stroke="#B9C3CC" stroke-width="2.6" stroke-linejoin="round"/><circle cx="16" cy="18.5" r="2.2" fill="#6FA8DC"/></svg>
+    Deal Darwin
+  </div>
+  <div class="chips" role="radiogroup" aria-label="Contract" id="chips"></div>
+  <button class="btn sm" id="newrun" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Run</button>
+  <ol class="stepper" id="stepper" aria-label="Pipeline"></ol>
+</header>
+
+<main id="grid">
+  <section class="card" id="card-contract" data-step="1" aria-labelledby="h-contract">
+    <div class="card-h"><h2 id="h-contract">Contract</h2><span class="sp"></span><span id="contract-tags" class="card-h"></span></div>
+    <div class="contract-body">
+      <div class="rows" id="rows" data-step="1"></div>
+      <div class="gauge" id="gauge" data-step="2"></div>
+    </div>
+  </section>
+
+  <section class="card" id="card-counter" data-step="3" aria-labelledby="h-counter">
+    <div class="card-h"><h2 id="h-counter">Counter-offers</h2><span class="sp"></span><span id="recovered"></span></div>
+    <div class="offers" role="radiogroup" aria-label="Offers" id="offers"></div>
+  </section>
+
+  <section class="card" id="card-evo" data-step="3" aria-labelledby="h-evo">
+    <div class="card-h"><h2 id="h-evo">Evolution</h2><span class="sp"></span>
+      <span class="legend"><span><i></i>best</span><span><i class="m"></i>top-10 mean</span></span><span class="tag" id="evo-calls"></span></div>
+    <div class="evo-now" id="evo-now" aria-live="polite"></div>
+    <div class="chart" id="chart"></div>
+    <input type="range" id="gen" min="0" max="3" step="1" value="3" aria-label="Generation">
+  </section>
+
+  <section class="card" id="card-creative" data-step="4" aria-labelledby="h-creative">
+    <div class="card-h"><h2 id="h-creative">Creative</h2><span class="sp"></span><span class="tag" id="model-tag"></span></div>
+    <div class="concepts" id="concepts"></div>
+  </section>
+</main>
+
+<footer class="pack" id="pack" data-step="5">
+  <span class="lbl">Pack</span>
+  <img id="pack-img" alt="Winning concept">
+  <div class="po"><span class="phrase" id="pack-offer"></span><small id="pack-meta"></small></div>
+  <div class="rs" id="pack-risk"></div>
+  <button class="btn" id="export"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Export pack</button>
+  <p class="fine">Synthetic brands and contracts. Scores are measured against simulated brands.</p>
+</footer>
+
+<dialog id="lightbox" aria-label="Concept"></dialog>
+<div class="launcher" id="launcher" hidden>
+  <div class="lcard" role="dialog" aria-label="New run">
+    <button class="x" id="l-close" aria-label="Close">✕</button>
+    <label class="drop" id="drop" tabindex="0">
+      <input type="file" id="file" accept="application/pdf,.pdf" hidden>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+      <b id="drop-label">Drop contract PDF</b><small>or click</small>
+    </label>
+    <div class="lrow">
+      <div class="chips" role="radiogroup" aria-label="Sample" id="samples"></div>
+      <select id="persona" aria-label="Creator persona"></select>
+      <select id="brand" aria-label="Brand"></select>
+      <button class="btn" id="run"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Run</button>
+    </div>
+    <p class="lerr" id="lerr" aria-live="polite"></p>
+  </div>
+</div>
+<div id="sheet-wrap" hidden></div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const ASPECTS = ["fee", "usage_rights", "exclusivity", "payment_terms", "kill_fee"];
+const NAMES = {fee: "Fee", usage_rights: "Usage", exclusivity: "Exclusivity", payment_terms: "Payment", kill_fee: "Kill fee"};
+const STATUS = {found: "found", ambiguous: "ambiguous", not_found: "not found"};
+const RULES = {R1: "Logo", R2: "Palette", R3: "#ad disclosure", R4: "No competitors", R5: "Safe zone"};
+const RISK_RGB = ["", "95,180,140", "140,178,120", "217,178,106", "214,152,112", "210,124,124"];
+const rk = n => RISK_RGB[Math.min(5, Math.max(1, Math.round(n)))];
+const RISK_COLOR = n => `rgb(${rk(n)})`;
+const RISK_PILL = n => `background:rgba(${rk(n)},.14);color:rgb(${rk(n)});box-shadow:inset 0 0 0 1px rgba(${rk(n)},.28)`;
+const TINT = n => `rgba(${rk(n)},.045)`;
+const STEPS = [["Ingest", "#rows"], ["Score", "#gauge"], ["Counter", "#card-counter"], ["Creative", "#card-creative"], ["Pack", "#pack"]];
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const pct = x => Math.round(x * 100) + "%";
+const money = x => "$" + Math.round(x).toLocaleString("en-US");
+const usage = m => m >= 999 ? "perpetual" : m + " mo";
+const excl = m => m === 0 ? "none" : m + " mo";
+const revs = r => r >= 99 ? "unlimited rev" : r + " rev";
+const phrase = o => `Fee ${pct(o.fee_mult)}, usage ${usage(o.usage_months)}, excl ${excl(o.excl_months)}, net-${o.net_days}, ${o.kill_pct}% kill fee, ${revs(o.revisions)}`;
+const fill = root => requestAnimationFrame(() => requestAnimationFrame(() =>
+  root.querySelectorAll("[data-w]").forEach(el => el.style.width = el.dataset.w)));
+const track = (v, color) => `<span class="track"><i data-w="${Math.max(0, Math.min(1, v)) * 100}%"${color ? ` style="background:${color}"` : ""}></i></span>`;
+
+const state = {cid: DATA.contracts.C ? "C" : Object.keys(DATA.contracts)[0], method: null, sel: 0, gen: 0, open: null};
+const C = () => DATA.contracts[state.cid];
+const methods = () => (C().counters && C().counters.methods) || [];
+const method = () => methods().find(m => m.label === state.method) || methods()[0];
+const CREATIVE = {cached: DATA.creative, live: null};
+const creative = () => (C().live ? CREATIVE.live : CREATIVE.cached);
+const winner = () => creative() && creative().concepts.find(x => x.winner);
+const seen = new Set();
+const counts = a => [ASPECTS.filter(k => a[k] && a[k].status === "ambiguous").length, ASPECTS.filter(k => a[k] && a[k].status === "not_found").length];
+const restart = el => { el.classList.remove("pulse"); void el.offsetWidth; el.classList.add("pulse"); };
+
+/* ---------- top bar ---------- */
+function renderChips() {
+  $("#chips").innerHTML = Object.values(DATA.contracts).map(c =>
+    `<button role="radio" data-cid="${c.id}" aria-checked="${c.id === state.cid}" tabindex="${c.id === state.cid ? 0 : -1}" title="${esc(c.label)}">${c.chip || c.id}</button>`).join("");
+}
+$("#chips").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setContract(b.dataset.cid); });
+$("#chips").addEventListener("keydown", e => {
+  const ids = Object.keys(DATA.contracts), d = {ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1}[e.key];
+  if (!d) return; e.preventDefault();
+  setContract(ids[(ids.indexOf(state.cid) + d + ids.length) % ids.length]);
+  $(`#chips [data-cid="${state.cid}"]`).focus();
+});
+function setContract(cid) {
+  state.cid = cid; state.method = null; state.sel = 0; state.open = null;
+  renderChips(); renderContract(); renderCounters(); renderEvo(); renderCreative(); renderPack();
+}
+$("#stepper").innerHTML = STEPS.map(([l], i) => `<li><button data-step="${i + 1}"><b>${i + 1}</b><span>${l}</span></button></li>`).join("");
+$("#stepper").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const n = +b.dataset.step, target = $(STEPS[n - 1][1]), card = target.closest(".card, .pack");
+  card.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "center"});
+  setStep(n); restart(card); if (target !== card) restart(target);
+});
+function setStep(n) { document.querySelectorAll("#stepper button").forEach(b => b.classList.toggle("active", +b.dataset.step === n)); }
+const stepOf = el => { const s = el && el.closest && el.closest("[data-step]"); return s && !el.closest("#stepper") ? +s.dataset.step : null; };
+document.addEventListener("pointerover", e => { const n = stepOf(e.target); if (n) setStep(n); });
+document.addEventListener("focusin", e => { const n = stepOf(e.target); if (n) setStep(n); });
+addEventListener("scroll", () => {  // stacked layout: the section nearest the viewport centre
+  const mid = innerHeight / 2; let best = 1, dist = Infinity;
+  STEPS.forEach(([, sel], i) => { const r = $(sel).getBoundingClientRect(), d = Math.abs((r.top + r.bottom) / 2 - mid); if (d < dist) { dist = d; best = i + 1; } });
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) best = 5;
+  setStep(best);
+}, {passive: true});
+
+/* ---------- contract ---------- */
+function fmtValue(k, v) {
+  if (v == null) return "—";
+  return {fee: money(v), usage_rights: v + " mo", exclusivity: v + " mo", payment_terms: "net-" + v, kill_fee: v + "%"}[k] || esc(v);
+}
+function probBlock(title, obj, colorFn) {
+  if (!obj) return "";
+  return `<div><h4>${title}</h4>${Object.entries(obj).map(([k, v]) =>
+    `<div class="pb"><span>${esc(STATUS[k] || k)}</span>${track(v, colorFn(k))}<span class="num">${v.toFixed(2)}</span></div>`).join("")}</div>`;
+}
+function renderContract() {
+  const c = C(), a = c.risk.aspects, ex = c.risk.extraction || {};
+  const cost = c.live && ex.cost_usd != null ? `NDI $${ex.cost_usd.toFixed(3)}${ex.reused ? " · reused" : ""}` : "";
+  $("#contract-tags").innerHTML = [c.brand && c.creator ? `${esc(c.brand)} × ${esc(c.creator)}` : "",
+    ex.source ? `${ex.source === "ndi" ? "NDI" : esc(ex.source)}${ex.ocr_applied ? " · OCR" : ""}${c.pages ? ` · ${c.pages} pp` : ""}` : "",
+    cost].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join("");
+  $("#rows").innerHTML = ASPECTS.filter(k => a[k]).map((k, i) => {
+    const x = a[k], fresh = !seen.has(c.id + k), open = state.open === k; seen.add(c.id + k);
+    return `<div class="row ${fresh ? "fade" : ""} ${open ? "open" : ""}" style="--i:${c.live ? 0 : i};background:${x.risk ? TINT(x.risk) : "transparent"}" data-k="${k}">
+      <button aria-expanded="${open}" aria-controls="d-${k}">
+        <span class="name">${NAMES[k]}</span>
+        <span class="val num">${fmtValue(k, x.value)}${x.page ? `<span class="pg">p${x.page}</span>` : ""}</span>
+        <span class="status"><span class="dot ${x.status}"></span>${STATUS[x.status]}</span>
+        ${x.risk ? `<span class="pill" style="${RISK_PILL(x.risk)}" title="risk ${x.risk}/5">${x.risk}</span>` : `<span class="pill pend">·</span>`}
+      </button>
+      <div class="detail" id="d-${k}"><div><div class="detail-in">
+        ${x.page ? `<span class="tag" style="justify-self:start">page ${x.page}</span>` : ""}
+        ${x.quote ? `<blockquote>${esc(x.quote)}</blockquote>` : `<blockquote class="none">no clause found</blockquote>`}
+        <div class="probs">
+          ${probBlock("Status", x.status_probabilities, s => ({found: "var(--ok)", ambiguous: "var(--warn)", not_found: "var(--bad)"})[s])}
+          ${probBlock("Risk", x.risk_probabilities, RISK_COLOR)}
+          ${probBlock("Ambiguity", x.ambiguity_probabilities, () => "var(--warn)")}
+        </div>
+      </div></div></div></div>`;
+  }).join("");
+  if (state.open) fill($("#rows"));
+  const r = c.risk.overall_risk, R = 54, CIRC = 2 * Math.PI * R, [amb, miss] = counts(a);
+  $("#gauge").innerHTML = `<div class="ring"><svg viewBox="0 0 132 132" role="img" aria-label="Overall risk ${r ?? "pending"} of 5">
+      <circle class="bg" cx="66" cy="66" r="${R}"/>
+      <circle class="fg" id="ring-fg" cx="66" cy="66" r="${R}" stroke="${r ? RISK_COLOR(r) : "transparent"}" stroke-dasharray="${CIRC}" stroke-dashoffset="${CIRC}"/></svg>
+      <div class="c"><b class="num" id="ring-num">${r == null ? "—" : "0.0"}</b><span>risk / 5</span></div></div>
+    <div class="counts"><span title="ambiguous"><span class="dot ambiguous"></span>${amb}</span><span title="not found"><span class="dot not_found"></span>${miss}</span></div>`;
+  if (r == null) return;
+  requestAnimationFrame(() => requestAnimationFrame(() => { $("#ring-fg").style.strokeDashoffset = CIRC * (1 - r / 5); }));
+  countUp($("#ring-num"), r, 1);
+}
+function countUp(el, to, dp) {
+  if (reduced) { el.textContent = to.toFixed(dp); return; }
+  const t0 = performance.now(), dur = 1100;
+  const step = t => { const f = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - f, 3); el.textContent = (to * e).toFixed(dp); if (f < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+$("#rows").addEventListener("click", e => {
+  const row = e.target.closest(".row"); if (!row || !e.target.closest("button")) return;
+  const k = row.dataset.k; state.open = state.open === k ? null : k;
+  document.querySelectorAll("#rows .row").forEach(r => {
+    const on = r.dataset.k === state.open; r.classList.toggle("open", on);
+    r.querySelector("button").setAttribute("aria-expanded", on); if (on) fill(r);
+  });
+});
+
+/* ---------- counter-offers ---------- */
+function renderCounters() {
+  const ms = methods();
+  if (!ms.length) { $("#offers").innerHTML = `<span class="tag">${C().live ? "…" : "no data"}</span>`; $("#recovered").innerHTML = ""; return; }
+  const m = method(), t = C().counters.truth;
+  if (!t || m.our_recovered == null) $("#recovered").innerHTML = ""; else {
+  const share = t.max_recovered > 0 ? m.our_recovered / t.max_recovered : 0;
+  const tip = `${m.our_recovered >= 0 ? "+" : ""}${m.our_recovered.toFixed(3)} of +${t.max_recovered.toFixed(3)} EV vs as-written (simulated brand)`;
+  $("#recovered").innerHTML = m.our_recovered > 0
+    ? `<span class="tag ok" title="${tip}">↗ recovered ${pct(share)} of best possible</span>`
+    : `<span class="tag bad" title="${tip}">↘ below as-written</span>`; }
+  $("#offers").innerHTML = m.top3.map((o, i) => `<button class="offer fade" style="--i:${i}" role="radio" data-i="${i}" aria-checked="${i === state.sel}" tabindex="${i === state.sel ? 0 : -1}">
+      <span class="rank">${i + 1}</span>
+      <span class="phrase">${phrase(o)}</span>
+      <span class="ometa"><span class="acc">accept ${track(o.p)}</span>
+        <span>P <b class="num">${pct(o.p)}</b></span><span>value <b class="num">${o.utility.toFixed(2)}</b></span></span>
+    </button>`).join("");
+  fill($("#offers"));
+}
+$("#offers").addEventListener("click", e => { const b = e.target.closest(".offer"); if (b) selectOffer(+b.dataset.i); });
+$("#offers").addEventListener("keydown", e => {
+  const d = {ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1}[e.key]; if (!d) return; e.preventDefault();
+  const n = method().top3.length; selectOffer((state.sel + d + n) % n); $(`#offers [data-i="${state.sel}"]`).focus();
+});
+function selectOffer(i) {
+  state.sel = i;
+  document.querySelectorAll("#offers .offer").forEach(b => { const on = +b.dataset.i === i; b.setAttribute("aria-checked", on); b.tabIndex = on ? 0 : -1; });
+  renderPack(); restart($("#pack"));
+}
+
+/* ---------- evolution ---------- */
+const W = 600, H = 200, PAD = {l: 40, r: 16, t: 14, b: 26};
+let geo = null;
+function renderEvo() {
+  const ev = C().counters && C().counters.evolution;
+  $("#card-evo").hidden = !ev; $("#grid").classList.toggle("no-evo", !ev);
+  if (!ev) return;
+  const g = ev.generations, n = g.length, N = Math.max(n, ev.total || 0, 1);
+  $("#gen").max = Math.max(0, n - 1); $("#gen").disabled = !n;
+  $("#evo-calls").textContent = ev.n_drex_calls != null ? `${ev.n_drex_calls} Drex calls` : "";
+  const ymax = n ? Math.ceil(Math.max(...g.map(x => x.best)) * 1.2 * 10) / 10 : 0.6;
+  const x = i => PAD.l + i * (W - PAD.l - PAD.r) / Math.max(1, N - 1);
+  const y = v => H - PAD.b - v / ymax * (H - PAD.t - PAD.b);
+  geo = {x, y, n};
+  const line = key => g.map((d, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(d[key]).toFixed(1)}`).join(" ");
+  const ticks = [0, ymax / 2, ymax];
+  $("#chart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Best fitness per generation">
+    <defs><linearGradient id="grad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#B9C3CC" stop-opacity=".10"/><stop offset="1" stop-color="#B9C3CC" stop-opacity="0"/></linearGradient></defs>
+    <g class="axis">${ticks.map(v => `<line x1="${PAD.l}" x2="${W - PAD.r}" y1="${y(v)}" y2="${y(v)}"/>`).join("")}</g>
+    ${n ? `<path class="area" d="${line("best")} L${x(n - 1)},${y(0)} L${x(0)},${y(0)} Z"/>` : ""}
+    <path class="line-mean" d="${line("elite_mean")}"/>
+    <path class="line-best" id="best-line" d="${line("best")}"/>
+    <line class="scrub" id="scrub" x1="${x(Math.max(0, n - 1))}" x2="${x(Math.max(0, n - 1))}" style="${n ? "" : "display:none"}" y1="${PAD.t}" y2="${H - PAD.b}"/>
+  </svg>
+  <div class="overlay" style="position:absolute;inset:0;pointer-events:none">
+    ${ticks.map(v => `<span class="axl" style="position:absolute;left:0;width:${PAD.l - 8}px;text-align:right;top:calc(${y(v) / H * 100}% - 8px);font-size:11px;color:var(--faint)">${v.toFixed(2)}</span>`).join("")}
+    ${Array.from({length: N}, (_, i) => `<span style="position:absolute;bottom:2px;left:calc(${x(i) / W * 100}% - 12px);width:24px;text-align:center;font-size:11px;color:var(--faint)">G${i}</span>`).join("")}
+    ${g.map((d, i) => `<span class="ptd" data-i="${i}" style="position:absolute;left:calc(${x(i) / W * 100}% - 6px);top:calc(${y(d.best) / H * 100}% - 6px);width:12px;height:12px;border-radius:50%;border:2px solid var(--neutral-line);background:var(--surface);transition:transform 300ms,background 300ms"></span>`).join("")}
+  </div>`;
+  const bl = $("#best-line");
+  if (!reduced && !C().live) {
+    bl.style.strokeDasharray = "2000"; bl.style.strokeDashoffset = "2000"; bl.getBoundingClientRect();
+    bl.style.transition = "stroke-dashoffset 1400ms cubic-bezier(.2,.7,.2,1)"; bl.style.strokeDashoffset = "0";
+  }
+  if (n) setGen(n - 1); else $("#evo-now").innerHTML = `<span class="g">G0</span><span class="phrase pend">…</span>`;
+}
+function setGen(i) {
+  const d = C().counters.evolution.generations[i];
+  state.gen = i; $("#gen").value = i;
+  const s = $("#scrub"); s.setAttribute("x1", geo.x(i)); s.setAttribute("x2", geo.x(i));
+  document.querySelectorAll("#chart .ptd").forEach(p => { const on = +p.dataset.i === i; p.style.background = on ? "var(--accent)" : "var(--surface)"; p.style.borderColor = on ? "var(--accent)" : "var(--neutral-line)"; p.style.transform = on ? "scale(1.35)" : "none"; });
+  $("#evo-now").innerHTML = `<span class="g">G${d.gen}</span><span class="phrase">${phrase(d.offer)}</span>
+    <span class="st">fitness <b class="num">${d.best.toFixed(3)}</b></span><span class="st">P <b class="num">${pct(d.p)}</b></span>
+    <span class="st">value <b class="num">${d.utility.toFixed(2)}</b></span><span class="st">+<b class="num">${d.new_calls}</b> calls</span>`;
+}
+$("#gen").addEventListener("input", e => setGen(+e.target.value));
+(() => {
+  let drag = false;
+  const at = e => { const r = $("#chart").getBoundingClientRect(), vx = (e.clientX - r.left) / r.width * W;
+    let best = 0; for (let i = 1; i < geo.n; i++) if (Math.abs(geo.x(i) - vx) < Math.abs(geo.x(best) - vx)) best = i;
+    if (best !== state.gen) setGen(best); };
+  $("#chart").addEventListener("pointerdown", e => { drag = true; $("#chart").setPointerCapture(e.pointerId); at(e); });
+  $("#chart").addEventListener("pointermove", e => { if (drag) at(e); });
+  $("#chart").addEventListener("pointerup", () => drag = false);
+  $("#chart").addEventListener("pointercancel", () => drag = false);
+})();
+
+/* ---------- creative ---------- */
+function renderCreative() {
+  const cr = creative();
+  if (!cr) { $("#card-creative").hidden = true; return; }
+  $("#model-tag").textContent = cr.model || "";
+  $("#concepts").innerHTML = cr.concepts.map((x, i) => {
+    const pend = !x.prob, key = (C().live ? "L" : "S") + i + (pend ? "p" : "s"), fresh = !seen.has(key); seen.add(key);
+    const cls = pend ? "pending" : x.winner ? "win" : cr.decided === false ? "" : "lose";
+    return `<div class="concept ${fresh ? "fade" : ""} ${cls}" style="--i:${C().live ? 0 : i}">
+      <button data-i="${i}" aria-label="Concept ${i + 1}${pend ? "" : `, fit ${x.p_prod.toFixed(2)}`}${x.winner ? ", winner" : ""}">
+        <img src="${x.img}" alt="">${x.winner ? `<span class="crown">★ winner</span>` : ""}${x.scoring ? `<span class="scan"></span>` : ""}</button>
+      <div class="fit"><span>C${i + 1}</span><b class="num">${pend ? "…" : x.p_prod.toFixed(2)}</b></div>
+      <div class="rchips">${Object.keys(RULES).map(r => pend ? `<span class="rc pend">${r}</span>`
+        : `<span class="rc ${x.prob[r] >= .5 ? "ok" : "no"}" title="${r} ${RULES[r]} · p = ${x.prob[r].toFixed(2)}">${r}</span>`).join("")}</div>
+      ${!pend && x.failed.length ? `<span class="fail" title="${x.failed.map(r => RULES[r]).join(", ")}">✕ ${x.failed.map(r => RULES[r]).join(", ")}</span>` : ""}
+    </div>`;
+  }).join("");
+}
+$("#concepts").addEventListener("click", e => { const b = e.target.closest("button[data-i]"); if (b) openLightbox(+b.dataset.i); });
+function openLightbox(i) {
+  const x = creative().concepts[i], lb = $("#lightbox");
+  if (!x.prob) return;
+  lb.innerHTML = `<button class="x" aria-label="Close">✕</button><div class="lb">
+      <img src="${x.img}" alt="Concept ${i + 1}">
+      <div><h3>C${i + 1} ${x.winner ? `<span class="tag win">★ winner</span>` : x.failed.length ? `<span class="tag bad">rejected</span>` : ""}</h3>
+        <div class="fit" style="margin-bottom:8px"><span>fit</span><b class="num">${x.p_prod.toFixed(3)}</b></div>
+        ${Object.keys(RULES).map(r => `<div class="rl"><span class="rc ${x.prob[r] >= .5 ? "ok" : "no"}">${r}</span><span>${RULES[r]}</span><span class="num">${x.prob[r].toFixed(2)}</span></div>`).join("")}
+      </div></div>`;
+  lb.showModal(); lb.querySelector(".x").focus();
+  lb.querySelector(".x").onclick = () => lb.close();
+}
+$("#lightbox").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+
+/* ---------- pack + export ---------- */
+function renderPack() {
+  const c = C(), m = method(), o = m && m.top3[state.sel], w = winner(), [amb, miss] = counts(c.risk.aspects);
+  $("#pack-img").hidden = !w; if (w) $("#pack-img").src = w.img;
+  $("#pack-offer").textContent = o ? phrase(o) : "—";
+  $("#pack-meta").textContent = o ? `${c.live ? esc(c.label) : `Contract ${c.id}`} · ${m.name} #${state.sel + 1} · P ${pct(o.p)} · value ${o.utility.toFixed(2)}` : `${c.live ? esc(c.label) : `Contract ${c.id}`}`;
+  $("#pack-risk").innerHTML = `<span class="pill ${c.risk.overall_risk == null ? "pend" : ""}" style="${c.risk.overall_risk == null ? "" : RISK_PILL(c.risk.overall_risk)};padding:0 10px" title="overall risk / 5">${c.risk.overall_risk == null ? "…" : c.risk.overall_risk.toFixed(1)}</span>
+    <span class="status" title="ambiguous"><span class="dot ambiguous"></span>${amb}</span><span class="status" title="not found"><span class="dot not_found"></span>${miss}</span>`;
+}
+function closeSheet() { $("#sheet-wrap").hidden = true; $("#export").focus(); }
+$("#export").addEventListener("click", () => {
+  const c = C(), m = method(), o = m && m.top3[state.sel], w = winner(), a = c.risk.aspects, wrap = $("#sheet-wrap");
+  const terms = o ? [["Fee", `${pct(o.fee_mult)} of standard${o.fee_usd != null ? ` (${money(o.fee_usd)})` : ""}`], ["Usage rights", usage(o.usage_months)],
+    ["Exclusivity", excl(o.excl_months)], ["Payment", `net-${o.net_days}`], ["Kill fee", `${o.kill_pct}%`],
+    ["Revisions", o.revisions >= 99 ? "unlimited" : `${o.revisions}`], ["P(brand accepts)", pct(o.p)], ["Creator value", o.utility.toFixed(2)]] : [];
+  wrap.innerHTML = `<div class="sheet-bar"><button class="btn" id="do-print">Print / Save PDF</button><button class="btn ghost" id="close-sheet">Close</button></div>
+    <article class="sheet">
+      <h1><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#1B242C"/><path d="M9 23 L16 8 L23 23 Z" fill="none" stroke="#B9C3CC" stroke-width="2.6" stroke-linejoin="round"/></svg>Deal Darwin pack · ${c.live ? esc(c.label) : `Contract ${c.id}`}</h1>
+      <p class="sub">${esc(c.brand)} × ${esc(c.creator)}${o ? ` · counter-offer ${esc(m.name)} #${state.sel + 1}` : ""}</p>
+      <div class="cols"><div>
+        <h2>Counter-offer terms</h2><table>${terms.map(([k, v]) => `<tr><th>${k}</th><td>${esc(v)}</td></tr>`).join("")}</table>
+        <h2>Risk · overall ${c.risk.overall_risk == null ? "—" : c.risk.overall_risk.toFixed(2)} / 5</h2>
+        <table>${ASPECTS.filter(k => a[k]).map(k => `<tr><th>${NAMES[k]}</th><td>${STATUS[a[k].status]}</td><td>risk ${a[k].risk}/5</td></tr>`).join("")}</table>
+        <h2>Cited clauses</h2>
+        ${ASPECTS.filter(k => a[k]).map(k => `<div><b>${NAMES[k]}</b>${a[k].quote ? `<q>${esc(a[k].quote)}</q>` : ` <i>— no clause found</i>`}</div>`).join("")}
+      </div><div>${w ? `<h2>Creative</h2><img src="${w.img}" alt="Winning concept"><p class="sub">fit ${w.p_prod.toFixed(3)}<br>R1–R5: ${Object.values(w.prob).map(p => p.toFixed(2)).join(" · ")}</p>` : ""}</div></div>
+      <p class="foot">Synthetic brands and contracts. Scores are measured against simulated brands.</p>
+    </article>`;
+  wrap.hidden = false;
+  $("#do-print").onclick = () => print();
+  $("#close-sheet").onclick = closeSheet;
+  $("#do-print").focus();
+});
+addEventListener("keydown", e => { if (e.key === "Escape" && !$("#sheet-wrap").hidden) closeSheet(); });
+
+/* ---------- live mode (served by app/server.py) ---------- */
+const LIVE = location.protocol.startsWith("http");
+const STAGE_N = {ingest: 1, score: 2, counter: 3, creative: 4, pack: 5};
+const CARD = {ingest: "#card-contract", score: "#card-contract", counter: "#card-evo", creative: "#card-creative", pack: "#pack"};
+const run = {sample: "C", file: null, es: null};
+function badge(stage, status) {
+  const b = $(`#stepper button[data-step="${STAGE_N[stage]}"]`); if (!b) return;
+  let em = b.querySelector("em"); if (!em) { em = document.createElement("em"); b.appendChild(em); }
+  em.className = "bd " + (status || ""); em.textContent = !status || status === "running" ? "" : status;
+}
+function setupLauncher() {
+  const cfg = DATA.config || {personas: [], sample_personas: {}};
+  $("#samples").innerHTML = Object.keys(cfg.sample_personas).map(id => `<button role="radio" data-s="${id}" aria-checked="${id === run.sample}">${id}</button>`).join("");
+  $("#persona").innerHTML = cfg.personas.map(p => `<option value="${p}">${p.replace(/_/g, " ")}</option>`).join("");
+  $("#brand").innerHTML = `<option value="">brand · auto</option>` + Object.entries(DATA.brands).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
+  const pick = id => { run.sample = id; run.file = null; $("#drop").classList.remove("has"); $("#drop-label").textContent = "Drop contract PDF";
+    document.querySelectorAll("#samples button").forEach(b => b.setAttribute("aria-checked", b.dataset.s === id));
+    if (cfg.sample_personas[id]) $("#persona").value = cfg.sample_personas[id]; };
+  const setFile = f => { if (!f) return; run.file = f; run.sample = null; $("#drop").classList.add("has"); $("#drop-label").textContent = f.name;
+    document.querySelectorAll("#samples button").forEach(b => b.setAttribute("aria-checked", false)); };
+  pick(run.sample);
+  $("#samples").addEventListener("click", e => { const b = e.target.closest("button"); if (b) pick(b.dataset.s); });
+  $("#file").addEventListener("change", e => setFile(e.target.files[0]));
+  $("#drop").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#file").click(); } });
+  ["dragenter", "dragover"].forEach(t => $("#drop").addEventListener(t, e => { e.preventDefault(); $("#drop").classList.add("over"); }));
+  ["dragleave", "drop"].forEach(t => $("#drop").addEventListener(t, e => { e.preventDefault(); $("#drop").classList.remove("over"); }));
+  $("#drop").addEventListener("drop", e => setFile(e.dataTransfer.files[0]));
+  $("#run").addEventListener("click", startRun);
+  $("#newrun").addEventListener("click", () => { $("#launcher").hidden = false; $("#run").focus(); });
+  $("#l-close").addEventListener("click", () => { $("#launcher").hidden = true; });
+  $("#newrun").hidden = false; $("#launcher").hidden = false;
+  const auto = new URLSearchParams(location.search).get("run");
+  if (auto && cfg.sample_personas[auto.toUpperCase()]) { pick(auto.toUpperCase()); startRun(); }
+}
+async function startRun() {
+  const fd = new FormData();
+  if (run.file) fd.append("file", run.file); else fd.append("sample", run.sample);
+  fd.append("persona", $("#persona").value); fd.append("brand", $("#brand").value);
+  $("#run").disabled = true; $("#lerr").textContent = "";
+  try {
+    const r = await fetch("/api/run", {method: "POST", body: fd}), j = await r.json();
+    if (!r.ok) throw new Error(j.error || r.status);
+    $("#launcher").hidden = true; beginLive(j);
+  } catch (e) { $("#lerr").textContent = e.message; } finally { $("#run").disabled = false; }
+}
+function beginLive(j) {
+  if (run.es) run.es.close();
+  const base = j.sample ? DATA.contracts[j.sample] : null;
+  DATA.contracts.LIVE = {id: "LIVE", chip: "● live", label: j.sample ? `Live · ${j.sample}` : "Live · upload", live: true,
+    brand: "", creator: "", pages: base ? base.pages : null, risk: {aspects: {}, overall_risk: null, extraction: {}},
+    counters: {methods: [], truth: null, evolution: {n_drex_calls: null, total: 4, generations: []}}};
+  CREATIVE.live = {model: CREATIVE.cached && CREATIVE.cached.model, decided: false,
+    concepts: (CREATIVE.cached ? CREATIVE.cached.concepts : []).map(x => ({img: x.img, name: x.name, prob: null, p_prod: null, failed: [], winner: false}))};
+  [...seen].filter(k => k.startsWith("LIVE") || k.startsWith("L")).forEach(k => seen.delete(k));
+  Object.keys(STAGE_N).forEach(st => badge(st, ""));
+  state.open = null; setContract("LIVE");
+  run.es = new EventSource(`/api/events/${j.job_id}`);
+  run.es.onmessage = e => onEvent(JSON.parse(e.data));
+  run.es.addEventListener("end", () => run.es.close());
+}
+function onEvent(ev) {
+  const c = DATA.contracts.LIVE, cr = CREATIVE.live, on = state.cid === "LIVE", R = (...fns) => on && fns.forEach(f => f());
+  switch (ev.type) {
+    case "stage":
+      badge(ev.stage, ev.status);
+      if (ev.reset) {
+        if (ev.stage === "score") Object.values(c.risk.aspects).forEach(a => { a.risk = null; });
+        if (ev.stage === "counter") c.counters.evolution.generations = [];
+        if (ev.stage === "creative") cr.concepts.forEach(x => Object.assign(x, {prob: null, p_prod: null, failed: [], scoring: false}));
+      }
+      if (ev.status === "running" && on) { setStep(STAGE_N[ev.stage]); const el = $(CARD[ev.stage]); if (el) restart(el); }
+      break;
+    case "meta": Object.assign(c, {brand: ev.brand || "?", creator: ev.creator || "?"}); c.risk.extraction = ev.extraction; R(renderContract); break;
+    case "clause": c.risk.aspects[ev.aspect.aspect] = ev.aspect; R(renderContract); break;
+    case "risk": c.risk.aspects[ev.aspect.aspect] = {...(c.risk.aspects[ev.aspect.aspect] || {}), ...ev.aspect}; R(renderContract, renderPack); break;
+    case "overall": c.risk.overall_risk = ev.overall_risk; R(renderContract, renderPack); break;
+    case "gen": c.counters.evolution.generations.push(ev.gen); R(renderEvo); break;
+    case "offers":
+      c.counters.methods = [ev.method]; c.counters.truth = ev.truth; c.counters.evolution.n_drex_calls = ev.n_drex_calls;
+      state.method = "evo"; state.sel = 0; R(renderCounters, renderEvo, renderPack); break;
+    case "concept_start": cr.concepts[ev.index].scoring = true; R(renderCreative); break;
+    case "concept": Object.assign(cr.concepts[ev.index], ev.concept, {scoring: false}); R(renderCreative); break;
+    case "winner": cr.decided = true; cr.concepts.forEach((x, i) => { x.winner = i === ev.index; }); R(renderCreative, renderPack); break;
+    case "error": $("#lerr").textContent = ev.message || "error"; break;
+    case "done": run.es && run.es.close(); break;
+  }
+}
+
+renderChips(); renderContract(); renderCounters(); renderEvo(); renderCreative(); renderPack(); setStep(1);
+if (LIVE) setupLauncher();
+</script>
+</body>
+</html>
