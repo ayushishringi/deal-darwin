@@ -1,15 +1,18 @@
-.env
-.env
-.env
-.env
+# Secrets: keep only the template
 .env
 .env.*
+!.env.example
 *.key
+
+# Python and tool caches
 __pycache__/
 .venv/
+.pytest_cache/
+.ruff_cache/
+
+# Misc
 node_modules/
 .DS_Store
 *.mov
 *.mp4
 *.zip
-!.env.example
