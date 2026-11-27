@@ -5,8 +5,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle,
-                                PageBreak, KeepTogether)
+from reportlab.platypus import (Paragraph, SimpleDocTemplate, Table, TableStyle)
 
 FONT_DIR = "/usr/share/fonts/truetype/dejavu/"
 pdfmetrics.registerFont(TTFont("DV", FONT_DIR + "DejaVuSans.ttf"))
