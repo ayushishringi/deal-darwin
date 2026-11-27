@@ -99,7 +99,7 @@ def iter_search(brand, persona, playbook, seed=SEED):
     """Yield {"type": "gen", "gen": {...}} per generation, then {"type": "final", "top3", "n_drex_calls"}."""
     rng = random.Random(seed)
     pool = [o for o in iter_grid() if not creator_red_lines(persona, o)]
-    scores, pop = {}, rng.sample(pool, POP)
+    scores, pop, elite = {}, rng.sample(pool, POP), []
     for g in range(GENERATIONS + 1):
         if g:
             budget, kids = MAX_CALLS - len(scores), []

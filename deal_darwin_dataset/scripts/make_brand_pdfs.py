@@ -6,7 +6,7 @@ so the text and the labels cannot drift apart.
 from reportlab.lib.units import inch
 from reportlab.platypus import Paragraph, Spacer
 
-from common import BRANDS, BRAND_ORDER, path, read_csv, USAGE_PERPETUAL
+from common import BRANDS, BRAND_ORDER, path, read_csv
 from pdfkit_util import make_doc, styles, table
 
 ACCENT = {"northwind": "#0B2545", "vela": "#7A2E57", "kettle": "#8A4B08"}

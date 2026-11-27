@@ -1,5 +1,4 @@
 """README data card, Drex question templates, and the evaluation harness."""
-import json
 from common import path, write_json
 
 TEMPLATES = {

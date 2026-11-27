@@ -1,0 +1,8 @@
+target-version = "py310"
+line-length = 140
+extend-exclude = [".vscode"]
+
+[lint]
+# The dataset scripts use a deliberately compact style (several statements per line,
+# one-line lambdas). Those style rules are off; pyflakes errors (F) still fail CI.
+ignore = ["E401", "E701", "E702", "E731"]

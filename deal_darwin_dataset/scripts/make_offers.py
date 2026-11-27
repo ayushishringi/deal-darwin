@@ -8,9 +8,9 @@ Outputs (in ../offers and ../brand):
   rate_cards.csv                  creator baselines and add-on pricing
 """
 import random
-from common import (BRANDS, BRAND_ORDER, CREATORS, PERSONAS, OFFER_KEYS, SEED, iter_grid,
+from common import (BRAND_ORDER, CREATORS, PERSONAS, OFFER_KEYS, SEED, iter_grid,
                     brand_eval, creator_utility, creator_red_lines, offer_text, usage_text, rev_text,
-                    path, write_csv, USAGE_PERPETUAL, REV_UNLIMITED)
+                    path, write_csv)
 
 
 def main():

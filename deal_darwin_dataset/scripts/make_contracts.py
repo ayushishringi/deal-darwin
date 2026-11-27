@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 from reportlab.lib.units import inch
 from reportlab.platypus import PageBreak, Paragraph, Spacer, Table, TableStyle
 
-from common import (BRANDS, CREATORS, PERSONAS, GRID, OFFER_KEYS, SEED, brand_eval, creator_utility,
+from common import (BRANDS, CREATORS, SEED, brand_eval, creator_utility,
                     iter_grid, offer_text, path, write_csv, write_json, USAGE_PERPETUAL, REV_UNLIMITED)
 from pdfkit_util import make_doc, styles, table, FONT_DIR
 
@@ -82,7 +82,6 @@ BRAND_ADDR = {"northwind": "1200 Alder Street, Portland, OR 97209",
 
 def signature(c, brand_id, creator_id):
     b, cr = BRANDS[brand_id], CREATORS[creator_id]
-    st = styles("#222222", serif=True)
     left = (f"<b>BRAND</b><br/>{esc(b['legal'])}<br/><br/>By: ______________________<br/>"
             f"Name: {esc(SIGNER[brand_id])}<br/>Title: {esc(SIGNER_TITLE[brand_id])}<br/>Date: ______________")
     right = (f"<b>CREATOR</b><br/>{esc(cr['name'])}<br/><br/>Signature: __________________<br/>"

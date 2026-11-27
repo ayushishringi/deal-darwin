@@ -33,10 +33,10 @@ ROOT = os.path.dirname(APP)
 sys.path.insert(0, APP)
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
-from common import (BRANDS, CREATORS, OFFER_KEYS, USAGE_PERPETUAL, REV_UNLIMITED,
-                    GRID, iter_grid, creator_red_lines, creator_utility,
+from common import (BRANDS, CREATORS, OFFER_KEYS, USAGE_PERPETUAL, REV_UNLIMITED,  # noqa: E402
+                    iter_grid, creator_red_lines, creator_utility,
                     expected_value, offer_text, usage_text, rev_text)
-from drex_client import ask
+from drex_client import ask  # noqa: E402
 
 TOP_N = 40
 
